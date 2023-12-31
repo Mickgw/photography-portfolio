@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-heading text-black tracking-tight uppercase;
+}
+
+h1 {
+    @apply text-8xl font-semibold;
+}
+
+h2 {
+    @apply text-5xl font-semibold;
+}
+
+h3 {
+    @apply text-3xl font-semibold;
+}
+
+h4 {
+    @apply text-2xl font-semibold;
+}
+
+h5 {
+    @apply text-xl font-semibold;
+}
+
+h6 {
+    @apply text-lg font-semibold;
+}
+
+.container {
+    @apply mx-auto font-semibold;
+}
