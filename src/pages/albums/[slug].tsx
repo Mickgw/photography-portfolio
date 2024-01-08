@@ -3,23 +3,39 @@ import fs from "fs";
 import matter from "gray-matter";
 import { AlbumsImages } from "@/components/AlbumsImages";
 import PageTransition from "@/components/PageTransition";
+import { TextMarquee } from "@/components/Marquee/TextMarquee";
 
 export default function AlbumPage({ contents }: any) {
+    console.log(contents);
+
     return (
         <PageTransition>
-            <div className="container flex gap-1 items-center">
-                <Link href="/albums" className="text-blue-500">
-                    Albums
-                </Link>
-                <span>/</span>{" "}
-                <span className="font-bold">{contents?.title}</span>
-            </div>
+            <article className="page-contents">
+                <section className="single-album-hero">
+                    <div className="relative h-screen max-h-[800px] bg-black overflow-hidden">
+                        <TextMarquee
+                            text={contents?.marqueeTitle}
+                            className="absolute bottom-2 inset-x-0"
+                        />
+                    </div>
+                </section>
 
-            <div className="container">
-                <h1>{contents?.title}</h1>
-                <p>{contents?.description}</p>
-                <AlbumsImages imageFolder={contents?.imagesFolder} />
-            </div>
+                <section className="container flex gap-1 items-center">
+                    <Link href="/albums" className="text-blue-500">
+                        Albums
+                    </Link>
+                    <span>/</span>{" "}
+                    <span className="font-bold">{contents?.title}</span>
+                </section>
+
+                <section className="container">
+                    <h1>{contents?.title}</h1>
+                    <p>{contents?.description}</p>
+                    <AlbumsImages imageFolder={contents?.imagesFolder} />
+                </section>
+
+                <div className="w-full h-screen" />
+            </article>
         </PageTransition>
     );
 }

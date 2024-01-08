@@ -31,9 +31,9 @@ export const CursorElement = () => {
             exit={elementHide}
             className="w-full h-full rounded-full font-semibold flex items-center justify-center text-center overflow-hidden text-white bg-black"
         >
-            <div className="h-fit flex items-center text-[24px]">
-                <span>EXPLORE</span>
-                <ArrowUpRight className="-mb-[4px]" width={36} height={36} />
+            <div className="h-fit flex items-center text-[26px]">
+                <span>explore</span>
+                <ArrowUpRight className="-mb-[7px]" width={32} height={32} />
             </div>
         </motion.div>
     );

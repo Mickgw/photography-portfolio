@@ -4,7 +4,7 @@ export const LoadingCounter = () => {
     return (
         <div
             id="counter--container"
-            className="z-20 overflow-hidden absolute right-6 md:right-14 bottom-6 md:bottom-14"
+            className="z-20 overflow-hidden absolute right-4 md:right-8 bottom-4 md:bottom-8"
         >
             <div className="w-[300px] h-[45px] sm:h-[60px] lg:h-[90px] overflow-hidden relative">
                 <div

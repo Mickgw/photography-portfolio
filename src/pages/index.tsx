@@ -55,7 +55,7 @@ export default function Home() {
                 "-=.8"
             )
             .to(cont, {
-                duration: 3,
+                duration: Math.random() * (5 - 2.5) + 2.5,
                 val: newValue,
                 roundProps: { val: 1 },
                 onUpdate: function () {
