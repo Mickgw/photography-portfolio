@@ -12,7 +12,7 @@ export const Name = ({ onMouseEnter, onMouseLeave, nameLinkCursor }: any) => {
         >
             <h1
                 id="firstname"
-                className=" leading-[.9]  !font-bold overflow-hidden text-[12vh] sm:text-[15vh] lg:text-[25vh] xl:text-[28vh] flex text-white"
+                className="leading-[.9] font-semibold overflow-hidden text-[12vh] sm:text-[15vh] lg:text-[25vh] xl:text-[28vh] flex text-white"
             >
                 {Array.from("Mick.").map((letter, index) => (
                     <div key={index} className="letter">

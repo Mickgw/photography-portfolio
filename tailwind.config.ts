@@ -7,14 +7,6 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    // colors: {
-    //     "base": '#ffffff',
-    //     "primary": '#e2e8f0',
-    // },
-    fontFamily: {
-        'heading': ['Montserrat', 'sans-serif'],
-        'body': ['Helvetica', 'Arial', 'sans-serif']
-    },
     container: {
         padding: '1rem',
     },

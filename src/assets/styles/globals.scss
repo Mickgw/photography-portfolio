@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    font-family: "Mona Sans";
+}
+
 body {
     background-color: white;
 }
@@ -12,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-    @apply font-heading text-black tracking-tight uppercase;
+    @apply text-black tracking-tight;
 }
 
 h1 {
