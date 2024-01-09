@@ -20,7 +20,7 @@ export default function AlbumPage({ contents }: any) {
         let timeline = gsap.timeline();
 
         timeline.to(parallaxImage.current, {
-            yPercent: 25,
+            yPercent: 30,
             ease: "none",
             scrollTrigger: {
                 trigger: parallaxTrigger.current,
@@ -44,7 +44,7 @@ export default function AlbumPage({ contents }: any) {
 
                 <section
                     ref={parallaxTrigger}
-                    className="single-album-hero h-[300px] lg:h-[100vh] max-h-[850px] relative"
+                    className="single-album-hero h-[300px] lg:h-[100vh] max-h-[900px] relative"
                 >
                     <div className="w-full h-full inset-0 rounded-b-xl md:rounded-b-xl lg:rounded-b-[2rem] overflow-hidden absolute">
                         <Image
@@ -53,16 +53,21 @@ export default function AlbumPage({ contents }: any) {
                             alt="hero image"
                             fill
                             priority
-                            className="object-cover object-center"
+                            className="object-cover object-[10%_10%]"
                         />
                     </div>
+                    <TextMarquee
+                        text={contents?.marqueeTitle}
+                        textColor="#ededed"
+                        className="absolute bottom-4 w-full overflow-hidden lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[160px]"
+                    />
                 </section>
 
-                <TextMarquee
+                {/* <TextMarquee
                     text={contents?.marqueeTitle}
                     textColor="#ededed"
                     className="w-full overflow-hidden lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[160px]"
-                />
+                /> */}
 
                 <section className="container">
                     <h1>{contents?.title}</h1>
