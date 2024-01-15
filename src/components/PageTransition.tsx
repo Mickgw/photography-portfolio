@@ -1,59 +1,40 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 const PageTransition = ({ children, router }: any) => {
-    // const searchParams = useSearchParams();
-    // const pathname = usePathname();
-    // const firstUpdate = useRef(true);
-
-    // useEffect(() => {}, [searchParams]);
-    const animate = (variants: any) => {
-        return {
-            initial: "initial",
-            animate: "enter",
-            exit: "exit",
-            variants,
-        };
-    };
-
     const enterAnimation = {
         initial: {
             top: 0,
         },
         enter: {
-            top: "100%",
+            top: "-100vh",
             transition: {
-                duration: 1,
+                duration: 0.85,
+                delay: 0.7,
                 ease: [0.76, 0, 0.24, 1],
             },
             transitionEnd: {
-                top: 0,
-                height: 0,
-                duration: 1,
-                ease: [0.76, 0, 0.24, 1],
+                top: "100vh",
+                borderRadius: 0,
             },
         },
         exit: {
             top: 0,
-            height: "100%",
             transition: {
-                duration: 1,
+                duration: 0.85,
                 ease: [0.76, 0, 0.24, 1],
             },
         },
     };
 
     return (
-        <div className="page-transition--container">
+        <div className="page-transition--container overflow-hidden">
             <motion.div
                 variants={enterAnimation}
                 initial="initial"
                 animate="enter"
                 exit="exit"
-                className="w-full h-screen fixed inset-0 bg-black z-[9999] pointer-events-none"
+                className="w-screen h-screen overflow-hidden fixed inset-0 bg-black z-[100] pointer-events-none"
             />
-
             {children}
         </div>
     );

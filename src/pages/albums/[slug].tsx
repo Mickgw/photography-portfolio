@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { motion } from "framer-motion";
 
 export default function AlbumPage({ contents }: any) {
     const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
@@ -21,6 +22,7 @@ export default function AlbumPage({ contents }: any) {
 
         timeline.to(parallaxImage.current, {
             yPercent: 30,
+            scale: 1.15,
             ease: "none",
             scrollTrigger: {
                 trigger: parallaxTrigger.current,
@@ -34,47 +36,66 @@ export default function AlbumPage({ contents }: any) {
     return (
         <PageTransition>
             <article className="page-contents">
-                {/* <section className="container flex gap-1 items-center">
-                    <Link href="/albums" className="text-blue-500">
-                        Albums
-                    </Link>
-                    <span>/</span>{" "}
-                    <span className="font-bold">{contents?.title}</span>
-                </section> */}
-
                 <section
                     ref={parallaxTrigger}
-                    className="single-album-hero h-[300px] lg:h-[100vh] max-h-[900px] relative"
+                    className="single-album-hero max-h-[450px] md:max-h-[600px] lg:max-h-[750px] xl:max-h-[900px] min-h-screen relative overflow-hidden"
                 >
-                    <div className="w-full h-full inset-0 rounded-b-xl md:rounded-b-xl lg:rounded-b-[2rem] overflow-hidden absolute">
+                    <motion.div
+                        initial={{ scale: 1.2 }}
+                        animate={{
+                            scale: 1,
+                            transition: {
+                                delay: 0.4,
+                                duration: 1.7,
+                                ease: [0.76, 0, 0.24, 1],
+                            },
+                        }}
+                        className="w-full h-full inset-0 overflow-hidden absolute"
+                    >
                         <Image
                             ref={parallaxImage}
                             src={contents?.thumbnail}
                             alt="hero image"
                             fill
                             priority
-                            className="object-cover object-[10%_10%]"
+                            className="object-cover object-[50%_10%]"
                         />
-                    </div>
-                    <TextMarquee
-                        text={contents?.marqueeTitle}
-                        textColor="#ededed"
-                        className="absolute bottom-4 w-full overflow-hidden lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[160px]"
-                    />
+                    </motion.div>
+
+                    <motion.div
+                        className="absolute bottom-0 w-full overflow-hidden"
+                        initial={{ y: 250, opacity: 0 }}
+                        animate={{
+                            y: 0,
+                            opacity: 1,
+
+                            transition: {
+                                delay: 0.6,
+                                duration: 1.3,
+                                ease: [0.33, 1, 0.68, 1],
+                            },
+                        }}
+                    >
+                        <TextMarquee
+                            text={contents?.marqueeTitle}
+                            textColor="#ededed"
+                            className=" lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[160px]"
+                        />
+                    </motion.div>
                 </section>
 
-                {/* <TextMarquee
-                    text={contents?.marqueeTitle}
-                    textColor="#ededed"
-                    className="w-full overflow-hidden lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[160px]"
-                /> */}
-
+                <section className="container flex gap-1 items-center">
+                    <Link href="/albums" className="text-blue-500">
+                        Albums
+                    </Link>
+                    <span>/</span>{" "}
+                    <span className="font-bold">{contents?.title}</span>
+                </section>
                 <section className="container">
-                    <h1>{contents?.title}</h1>
+                    <h1 className="lowercase">{contents?.title}</h1>
                     <p>{contents?.description}</p>
                     <AlbumsImages imageFolder={contents?.imagesFolder} />
                 </section>
-
                 <div className="w-full h-screen" />
             </article>
         </PageTransition>
