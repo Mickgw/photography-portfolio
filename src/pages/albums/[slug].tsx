@@ -1,4 +1,3 @@
-import Link from "next/link";
 import fs from "fs";
 import matter from "gray-matter";
 import { AlbumsImages } from "@/components/AlbumsImages";
@@ -10,10 +9,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { motion } from "framer-motion";
+import { IntroText } from "@/components/IntroText/IntroText";
 
 export default function AlbumPage({ contents }: any) {
     const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
+
+    console.log(contents);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -22,7 +24,7 @@ export default function AlbumPage({ contents }: any) {
 
         timeline.to(parallaxImage.current, {
             yPercent: 30,
-            scale: 1.15,
+            scale: 1.1,
             ease: "none",
             scrollTrigger: {
                 trigger: parallaxTrigger.current,
@@ -38,7 +40,7 @@ export default function AlbumPage({ contents }: any) {
             <article className="page-contents">
                 <section
                     ref={parallaxTrigger}
-                    className="single-album-hero max-h-[450px] md:max-h-[600px] lg:max-h-[750px] xl:max-h-[900px] min-h-screen relative overflow-hidden"
+                    className="single-album-hero max-h-[450px] md:max-h-[600px] lg:max-h-[750px] xl:max-h-none min-h-screen relative overflow-hidden"
                 >
                     <motion.div
                         initial={{ scale: 1.2 }}
@@ -63,7 +65,7 @@ export default function AlbumPage({ contents }: any) {
                     </motion.div>
 
                     <motion.div
-                        className="absolute bottom-0 w-full overflow-hidden"
+                        className="absolute bottom-6 w-full overflow-hidden"
                         initial={{ y: 250, opacity: 0 }}
                         animate={{
                             y: 0,
@@ -79,18 +81,28 @@ export default function AlbumPage({ contents }: any) {
                         <TextMarquee
                             text={contents?.marqueeTitle}
                             textColor="#ededed"
-                            className=" lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[160px]"
+                            className=" lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[150px]"
                         />
                     </motion.div>
                 </section>
 
-                <section className="container flex gap-1 items-center">
+                {/* <section className="container flex gap-1 items-center">
                     <Link href="/albums" className="text-blue-500">
                         Albums
                     </Link>
                     <span>/</span>{" "}
                     <span className="font-bold">{contents?.title}</span>
+                </section> */}
+
+                <section className="min-h-screen container py-32">
+                    <IntroText
+                        year={contents?.year}
+                        title={contents?.introTitle}
+                        subtitle={contents?.introSubtitle}
+                        description={contents?.description}
+                    />
                 </section>
+
                 <section className="container">
                     <h1 className="lowercase">{contents?.title}</h1>
                     <p>{contents?.description}</p>

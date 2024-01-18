@@ -6,6 +6,10 @@ html {
     font-family: "Mona Sans";
 }
 
+.container {
+    max-width: none !important;
+}
+
 body {
     background-color: white;
 }
@@ -24,7 +28,8 @@ h1 {
 }
 
 h2 {
-    @apply text-5xl font-semibold;
+    font-size: 120px;
+    // @apply text-7xl font-semibold;
 }
 
 h3 {

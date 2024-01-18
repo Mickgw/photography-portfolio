@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     container: {
-        padding: '1rem',
+        padding: '3rem',
     },
 
     extend: {
@@ -22,6 +22,10 @@ const config: Config = {
             '3xl': "clamp(1.5rem, 1.1441rem + 1.7797vw, 2.8125rem)",
             '2xl': "clamp(1.5rem, 0.25rem + 4vw, 2.3rem)",
         },
+
+        colors: {
+            'highlight': '#2e2b2b',
+        }
     },
   },
   plugins: [],
