@@ -3,20 +3,22 @@ import { useScroll, motion } from "framer-motion";
 import { Word } from "./Words";
 
 interface ParagraphProps {
-    text?: string;
+    className?: string;
+    children?: any;
 }
 
-export const Paragraph = ({ text }: ParagraphProps) => {
+export const Paragraph = ({ className, children }: ParagraphProps) => {
     const paragraph = useRef(null);
     const { scrollYProgress } = useScroll({
         target: paragraph,
         offset: ["start .9", "start .4"],
     });
 
-    const words = text?.split(" ");
+    const words = children?.split(" ");
+
     return (
         <p
-            className="paragraph text-2xl max-w-6xl flex flex-wrap leading-[1] font-normal"
+            className={`paragraph max-w-2xl flex flex-wrap leading-[1] ${className}`}
             ref={paragraph}
         >
             {words?.map((word: string, index: number) => {

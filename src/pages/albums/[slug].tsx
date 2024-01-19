@@ -40,7 +40,7 @@ export default function AlbumPage({ contents }: any) {
             <article className="page-contents">
                 <section
                     ref={parallaxTrigger}
-                    className="single-album-hero max-h-[450px] md:max-h-[600px] lg:max-h-[750px] xl:max-h-none min-h-screen relative overflow-hidden"
+                    className="single-album-hero h-[550px] md:max-h-[600px] lg:h-[750px] xl:h-screen lg:min-h-screen relative overflow-hidden"
                 >
                     <motion.div
                         initial={{ scale: 1.2 }}
@@ -65,7 +65,7 @@ export default function AlbumPage({ contents }: any) {
                     </motion.div>
 
                     <motion.div
-                        className="absolute bottom-6 w-full overflow-hidden"
+                        className="absolute bottom-0 lg:bottom-3 w-full overflow-hidden"
                         initial={{ y: 250, opacity: 0 }}
                         animate={{
                             y: 0,
@@ -80,8 +80,10 @@ export default function AlbumPage({ contents }: any) {
                     >
                         <TextMarquee
                             text={contents?.marqueeTitle}
-                            textColor="#ededed"
-                            className=" lg:-mt-10 [&_h1]:text-[50px] [&_h1]:md:text-[100px] [&_h1]:lg:text-[150px]"
+                            textColor="#ffffff"
+                            gap={50}
+                            initialDirection="right"
+                            className="lg:-mt-10 text-10xl"
                         />
                     </motion.div>
                 </section>
@@ -94,7 +96,7 @@ export default function AlbumPage({ contents }: any) {
                     <span className="font-bold">{contents?.title}</span>
                 </section> */}
 
-                <section className="min-h-screen container py-32">
+                <section className="min-h-screen container pt-[15vh]">
                     <IntroText
                         year={contents?.year}
                         title={contents?.introTitle}
@@ -104,8 +106,6 @@ export default function AlbumPage({ contents }: any) {
                 </section>
 
                 <section className="container">
-                    <h1 className="lowercase">{contents?.title}</h1>
-                    <p>{contents?.description}</p>
                     <AlbumsImages imageFolder={contents?.imagesFolder} />
                 </section>
                 <div className="w-full h-screen" />

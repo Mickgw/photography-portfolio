@@ -15,12 +15,12 @@ export const IntroText = ({
     description,
 }: IntroTextProps) => {
     return (
-        <section className="container py-44">
+        <section className="">
             <div className="mb-24 max-w-3xl">
-                <p className="text-[26px] text-black opacity-30 font-normal">
+                <p className="text-[18px] text-black opacity-30 font-normal">
                     {year}
                 </p>
-                <h2 className="leading-[1.05] -ml-[6px] ">{title}</h2>
+                <h2 className="lg:-ml-[6px] ">{title}</h2>
             </div>
 
             <div className="mb-12">
@@ -28,8 +28,10 @@ export const IntroText = ({
                 <div className="w-full h-[1px] bg-slate-300"></div>
             </div>
 
-            <div className="flex items-end justify-end text-highlight">
-                <Paragraph text={description} />
+            <div className="flex items-end justify-end text-highlight pr-4 md:pr-10">
+                <Paragraph className="text-2xl font-normal">
+                    {description}
+                </Paragraph>
             </div>
         </section>
     );

@@ -3,6 +3,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { TextSpacer } from "./TextSpacer";
+import { TextWithSpacer } from "./TextWithSpacer";
+import { getDirection } from "./lib/helpers";
 
 interface TextMarqueeProps {
     // Required
@@ -12,7 +14,7 @@ interface TextMarqueeProps {
     textColor?: string;
     className?: string;
     easing?: number;
-    initialDirection?: number;
+    initialDirection?: string;
     speed?: number;
     gap?: number;
 }
@@ -21,15 +23,21 @@ export const TextMarquee = ({
     text,
     textColor,
     className,
+    easing = 0.8,
+    initialDirection = "left",
+    speed = 0.04,
+    gap = 50,
 }: TextMarqueeProps) => {
     const firstText = useRef<HTMLHeadingElement>(null);
     const secondText = useRef<HTMLHeadingElement>(null);
     const sliderRef = useRef<HTMLHeadingElement>(null);
-
     const [offsetWidth, setOffsetWidth] = useState(0);
+    const marqueeWrapperClass =
+        "marquee-wrapper relative whitespace-nowrap flex [&_h1]:tracking-tighter [&_h1]:leading-[1.4]";
+    const marqueePartClass = "flex items-center";
 
+    let direction = getDirection(initialDirection);
     let xPercent = 0;
-    let direction = -1;
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -40,7 +48,7 @@ export const TextMarquee = ({
                 trigger: document.documentElement,
                 start: 0,
                 end: window.innerHeight,
-                scrub: 0.8,
+                scrub: easing,
                 onUpdate: (e) => (direction = e.direction * -1),
             },
             x: "-=200px",
@@ -62,9 +70,12 @@ export const TextMarquee = ({
             xPercent = -100;
         }
 
+        if (speed !== undefined && direction !== undefined) {
+            xPercent += speed * direction;
+        }
+
         gsap.set(firstText.current, { xPercent: xPercent });
         gsap.set(secondText.current, { xPercent: xPercent });
-        xPercent += 0.04 * direction;
 
         requestAnimationFrame(animation);
     };
@@ -72,34 +83,35 @@ export const TextMarquee = ({
     if (text) {
         return (
             <div className={` ${className}`}>
-                <div
-                    ref={sliderRef}
-                    className="relative whitespace-nowrap flex [&_h1]:tracking-tighter"
-                >
-                    <div ref={firstText} className="flex items-center">
-                        <h1 style={{ color: textColor ? textColor : "#000" }}>
-                            {text}
-                        </h1>
-                        <TextSpacer color={textColor ? textColor : "#000"} />
-                        <h1 style={{ color: textColor ? textColor : "#000" }}>
-                            {text}
-                        </h1>
-                        <TextSpacer color={textColor ? textColor : "#000"} />
+                <div ref={sliderRef} className={marqueeWrapperClass}>
+                    <div ref={firstText} className={marqueePartClass}>
+                        <TextWithSpacer
+                            text={text}
+                            textColor={textColor}
+                            gap={gap}
+                        />
+                        <TextWithSpacer
+                            text={text}
+                            textColor={textColor}
+                            gap={gap}
+                        />
                     </div>
 
                     <div
                         ref={secondText}
-                        className="flex items-center"
+                        className={marqueePartClass}
                         style={{ left: `${offsetWidth}px` }}
                     >
-                        <h1 style={{ color: textColor ? textColor : "#000" }}>
-                            {text}
-                        </h1>
-                        <TextSpacer color={textColor ? textColor : "#000"} />
-                        <h1 style={{ color: textColor ? textColor : "#000" }}>
-                            {text}
-                        </h1>
-                        <TextSpacer color={textColor ? textColor : "#000"} />
+                        <TextWithSpacer
+                            text={text}
+                            textColor={textColor}
+                            gap={gap}
+                        />
+                        <TextWithSpacer
+                            text={text}
+                            textColor={textColor}
+                            gap={gap}
+                        />
                     </div>
                 </div>
             </div>

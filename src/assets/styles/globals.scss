@@ -7,7 +7,7 @@ html {
 }
 
 .container {
-    max-width: none !important;
+    @apply max-w-none px-4 md:px-8 lg:px-12 xl:px-16;
 }
 
 body {
@@ -24,12 +24,11 @@ h6 {
 }
 
 h1 {
-    @apply text-8xl font-semibold;
+    @apply text-10xl font-semibold;
 }
 
 h2 {
-    font-size: 120px;
-    // @apply text-7xl font-semibold;
+    @apply text-7xl font-semibold leading-[1.05];
 }
 
 h3 {
