@@ -5,7 +5,7 @@ export const Character = ({ children, range, progress }: any) => {
     const opacity = useTransform(progress, range, [0, 1]);
 
     return (
-        <span className="character--wrapper">
+        <span className="character--wrapper -ml-[1px]">
             <span className="absolute opacity-30">{children}</span>
             <motion.span className="character_" style={{ opacity }}>
                 {children}

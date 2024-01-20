@@ -18,7 +18,9 @@ export const Paragraph = ({ className, children }: ParagraphProps) => {
 
     return (
         <p
-            className={`paragraph max-w-2xl flex flex-wrap leading-[1] ${className}`}
+            className={`paragraph flex flex-wrap leading-[1] ${
+                className ? className : "gap-x-[9px] gap-y-[8px]"
+            }`}
             ref={paragraph}
         >
             {words?.map((word: string, index: number) => {

@@ -50,3 +50,20 @@ h6 {
 .container {
     @apply mx-auto font-semibold;
 }
+
+.spinning-circular-text {
+    animation-name: spinning_circular_text;
+    animation-duration: 14s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: normal;
+}
+
+@keyframes spinning_circular_text {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

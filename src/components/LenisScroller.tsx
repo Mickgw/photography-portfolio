@@ -9,9 +9,7 @@ export const LenisScroller = () => {
         gsap.registerPlugin(ScrollTrigger);
         const lenis = new Lenis();
 
-        lenis.on("scroll", (e: any) => {
-            console.log(e);
-        });
+        lenis.on("scroll", (e: any) => {});
 
         function raf(time: number) {
             lenis.raf(time);

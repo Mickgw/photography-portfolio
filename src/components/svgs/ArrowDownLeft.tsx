@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ArrowUpRight = (props: any) => {
+export const ArrowDownLeft = (props: any) => {
     return (
         <svg
             width="100%"
@@ -17,13 +17,16 @@ export const ArrowUpRight = (props: any) => {
                 strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
-                <path
-                    d="M7 17L17 7M17 7H8M17 7V16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    stroke-strokelinecap="round"
-                    stroke-strokelinejoin="round"
-                ></path>
+                <g id="Arrow / Arrow_Down_Left_MD">
+                    <path
+                        id="Vector"
+                        d="M17 7L7 17M7 17H15M7 17V9"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    ></path>
+                </g>
             </g>
         </svg>
     );
