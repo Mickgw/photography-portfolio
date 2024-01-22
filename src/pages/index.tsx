@@ -2,15 +2,15 @@
 
 import Cursor from "@/components/Cursor/Cursor";
 import { CursorElement } from "@/components/Home/CursorElement";
-import { IntroText } from "@/components/Home/LoadingComponents/FinalLoadingComponents/IntroText";
 import { Name } from "@/components/Home/LoadingComponents/FinalLoadingComponents/Name";
 import { NavButton } from "@/components/Home/LoadingComponents/FinalLoadingComponents/NavButton";
-import { HeaderText } from "@/components/Home/LoadingComponents/InitialLoadingComponents/HeaderText";
-import { LoadingCounter } from "@/components/Home/LoadingComponents/InitialLoadingComponents/LoadingCounter";
+import { HeaderText } from "@/components/PreLoader/HeaderText";
+import { LoadingCounter } from "@/components/PreLoader/LoadingCounter";
 import PageTransition from "@/components/PageTransition";
 import { AnimatePresence, motion } from "framer-motion";
 import { gsap, Power2, Power3 } from "gsap";
 import React, { useEffect, useState } from "react";
+import PreLoader from "@/components/PreLoader/PreLoader";
 
 export default function Home() {
     const [cursorType, setCursorType] = useState("");
@@ -52,10 +52,10 @@ export default function Home() {
                     duration: 1,
                     ease: Power2.easeInOut,
                 },
-                "-=.8"
+                "-=1"
             )
             .to(cont, {
-                duration: Math.random() * (5 - 2.5) + 2.5,
+                duration: 4,
                 val: newValue,
                 roundProps: { val: 1 },
                 onUpdate: function () {
@@ -89,7 +89,7 @@ export default function Home() {
                 "-=0.5"
             )
             .fromTo(
-                ".loading--wrapper",
+                ".pre-loader-wrapper",
                 {
                     height: "100%",
                 },
@@ -115,21 +115,6 @@ export default function Home() {
                     display: "flex",
                 },
                 "-=.3"
-            )
-
-            .fromTo(
-                "#intro-text #text",
-                {
-                    skewY: 10,
-                    y: 80,
-                },
-                {
-                    skewY: 0,
-                    y: 0,
-                    duration: 1.3,
-                    ease: Power2.easeInOut,
-                },
-                "-=1"
             )
 
             .fromTo(
@@ -173,21 +158,17 @@ export default function Home() {
 
     return (
         <PageTransition>
+            <PreLoader />
             <div
                 className={`w-full h-screen relative overflow-hidden bg-white ${mainCursor}`}
             >
-                <div className="loading--wrapper w-full h-full absolute inset-0 bg-black z-20">
-                    <HeaderText />
-                    <LoadingCounter />
-                </div>
-
                 <div className="z-10 w-full h-full absolute inset-0 overflow-hidden bg-white">
                     <div className="absolute w-full h-full">
                         {timelineCompleted && (
                             <Cursor
                                 name="name-hover-cursor"
-                                width={200}
-                                height={200}
+                                width={250}
+                                height={250}
                                 className="z-10"
                             >
                                 <AnimatePresence>
@@ -199,7 +180,6 @@ export default function Home() {
                         )}
                         <div className="h-full relative container flex items-center justify-center">
                             <div className="flex flex-col sm:flex-row sm:items-end justify-center">
-                                <IntroText />
                                 <Name
                                     onMouseEnter={() =>
                                         setCursorType("nameHover")

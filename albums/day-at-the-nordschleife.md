@@ -1,7 +1,8 @@
 ---
 title: Rainy day at the Nordschleife
 marqueeTitle: Rainy day at the Nordschleife
-thumbnail: /images/nordschleife_23_10_2023/DSC03313-min.jpg
+thumbnail: /images/nordschleife_23_10_2023/DSC03440-min.jpg
+thumbnailWidescreen:
 metaTitle: Rainy day at the Nordschleife
 
 year: "2023"

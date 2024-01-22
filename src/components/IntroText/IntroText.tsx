@@ -78,7 +78,9 @@ export const IntroText = ({
                     <p className="text-[14px] sm:text-[16px] lg:text-[18px] text-black opacity-30 font-normal">
                         {year}
                     </p>
-                    <h2 className="-ml-[4px] lg:-ml-[6px] ">{title}</h2>
+                    <h2 className="-ml-[4px] lg:-ml-[6px] tracking-tight">
+                        {title}
+                    </h2>
                 </div>
 
                 <SpinningCircularText
@@ -102,7 +104,7 @@ export const IntroText = ({
             </div>
 
             <div className="mb-8 lg:mb-12">
-                <h4 className="text-highlight">{subtitle}</h4>
+                <h4 className="text-highlight ">{subtitle}</h4>
                 <div className="w-full h-[1px] bg-slate-300"></div>
             </div>
 
@@ -110,7 +112,7 @@ export const IntroText = ({
                 ref={arrowTrigger}
                 className="relative lg:flex lg:items-end lg:justify-end text-highlight pr-4 md:pr-6 xl:pr-10"
             >
-                <Paragraph className="w-full md:w-1/2 max-w-3xl text-xl xl:text-2xl font-normal gap-x-[5px] xl:gap-x-[8px] gap-y-[6px] xl:gap-y-[7px] pr-8 md:pr-0">
+                <Paragraph className="w-full md:w-1/2 max-w-3xl text-xl xl:text-2xl font-normal gap-x-[5px] xl:gap-x-[7px] gap-y-[6px] xl:gap-y-[7px] pr-8 md:pr-0">
                     {description}
                 </Paragraph>
 

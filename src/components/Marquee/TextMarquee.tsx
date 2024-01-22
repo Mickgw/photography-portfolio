@@ -33,7 +33,7 @@ export const TextMarquee = ({
     const sliderRef = useRef<HTMLHeadingElement>(null);
     const [offsetWidth, setOffsetWidth] = useState(0);
     const marqueeWrapperClass =
-        "marquee-wrapper relative whitespace-nowrap flex [&_h1]:tracking-tighter [&_h1]:leading-[1.4]";
+        "marquee-wrapper relative whitespace-nowrap flex [&_h1]:leading-[1.4]";
     const marqueePartClass = "flex items-center";
 
     let direction = getDirection(initialDirection);

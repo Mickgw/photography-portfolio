@@ -32,7 +32,7 @@ export const CursorElement = () => {
             className="w-full h-full rounded-full font-semibold flex items-center justify-center text-center overflow-hidden text-white bg-black"
         >
             <div className="h-fit flex items-center text-[26px]">
-                <span>explore</span>
+                <span>view pictures</span>
                 <ArrowUpRight className="-mb-[7px]" width={32} height={32} />
             </div>
         </motion.div>

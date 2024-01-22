@@ -14,12 +14,21 @@ body {
     background-color: white;
 }
 
+.text-expanded {
+    font-stretch: 125%;
+}
+
+.text-condensed {
+    font-stretch: 75%;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+    font-stretch: 105%;
     @apply text-black tracking-tight;
 }
 

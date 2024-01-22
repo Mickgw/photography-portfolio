@@ -14,7 +14,9 @@ export const TextWithSpacer = ({
 }: TextWithSpacerProps) => {
     return (
         <>
-            <h1 style={{ color: textColor ? textColor : "#000" }}>{text}</h1>
+            <h1 style={{ color: textColor ? textColor : "#000" }} className="">
+                {text}
+            </h1>
             <TextSpacer color={textColor ? textColor : "#000"} gap={gap} />
         </>
     );

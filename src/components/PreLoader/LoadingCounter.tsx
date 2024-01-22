@@ -11,9 +11,9 @@ export const LoadingCounter = () => {
                     id="counter-wrapper"
                     className="absolute leading-[.8] inset-0 hidden items-center justify-end gap-2 text-right !text-white"
                 >
-                    <h1 id="count" className="text-white">
+                    <h2 id="count" className="text-white">
                         0
-                    </h1>
+                    </h2>
                 </div>
             </div>
         </div>
