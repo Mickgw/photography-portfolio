@@ -3,11 +3,12 @@ import "@/assets/styles/fonts.scss";
 import type { AppProps } from "next/app";
 import { LenisScroller } from "@/components/LenisScroller";
 import { AnimatePresence } from "framer-motion";
+import { Layout } from "@/components/Layout";
 
 export default function App({ Component, pageProps, router }: AppProps) {
     return (
         <>
-            <LenisScroller />
+            <Layout />
 
             <AnimatePresence
                 mode="wait"

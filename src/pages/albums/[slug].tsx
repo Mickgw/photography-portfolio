@@ -20,14 +20,12 @@ export default function AlbumPage({ contents }: any) {
                 <Hero title={contents?.title} image={contents?.thumbnail} />
                 {/* <Breadcrumbs title={contents?.title} /> */}
 
-                <section className="min-h-screen container mt-[15vh]">
-                    <IntroText
-                        year={contents?.year}
-                        title={contents?.introTitle}
-                        subtitle={contents?.introSubtitle}
-                        description={contents?.description}
-                    />
-                </section>
+                <IntroText
+                    year={contents?.year}
+                    title={contents?.introTitle}
+                    subtitle={contents?.introSubtitle}
+                    description={contents?.description}
+                />
 
                 <section className="container">
                     <AlbumsImages imageFolder={contents?.imagesFolder} />

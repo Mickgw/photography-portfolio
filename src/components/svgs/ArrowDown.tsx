@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ArrowRight = (props: any) => {
+export const ArrowDown = (props: any) => {
     return (
         <svg
             viewBox="0 0 24 24"
@@ -11,18 +11,18 @@ export const ArrowRight = (props: any) => {
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
-                <g id="Arrow / Arrow_Right_MD">
+                <g id="Arrow / Arrow_Down_MD">
                     <path
                         id="Vector"
-                        d="M5 12H19M19 12L13 6M19 12L13 18"
+                        d="M12 5V19M12 19L18 13M12 19L6 13"
                         stroke="#000000"
-                        stroke-width="1.4"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     ></path>
                 </g>
             </g>

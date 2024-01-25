@@ -1,22 +1,14 @@
-"use client";
-
-import Cursor from "@/components/Cursor/Cursor";
-import { CursorElement } from "@/components/Home/CursorElement";
-import { Name } from "@/components/Home/LoadingComponents/FinalLoadingComponents/Name";
-import { NavButton } from "@/components/Home/LoadingComponents/FinalLoadingComponents/NavButton";
-import { HeaderText } from "@/components/PreLoader/HeaderText";
-import { LoadingCounter } from "@/components/PreLoader/LoadingCounter";
 import PageTransition from "@/components/PageTransition";
-import { AnimatePresence, motion } from "framer-motion";
-import { gsap, Power2, Power3 } from "gsap";
+import { gsap, Power2 } from "gsap";
 import React, { useEffect, useState } from "react";
 import PreLoader from "@/components/PreLoader/PreLoader";
+import HomeHero from "@/components/HomeHero/HomeHero";
+import HeroImage from "../../public/images/home_hero_image.webp";
+import { FooterHome } from "@/components/Footer/FooterHome";
 
 export default function Home() {
-    const [cursorType, setCursorType] = useState("");
     const [timelineCompleted, setTimelineCompleted] = useState(false);
     const nameLinkCursor = timelineCompleted ? "cursor-pointer" : "cursor-wait";
-    const mainCursor = timelineCompleted ? "cursor-default" : "cursor-wait";
 
     useEffect(() => {
         const cont = { val: 0 };
@@ -104,52 +96,7 @@ export default function Home() {
             .to("#counter--container, #header-text-wrapper", {
                 display: "none",
                 duration: 0,
-            })
-
-            .fromTo(
-                "#intro-text, #name-wrapper",
-                {
-                    display: "none",
-                },
-                {
-                    display: "flex",
-                },
-                "-=.3"
-            )
-
-            .fromTo(
-                "#name-wrapper #firstname .letter",
-                {
-                    y: -50,
-                    rotateX: -92,
-                    opacity: 0,
-                },
-                {
-                    y: 0,
-                    rotateX: 0,
-                    opacity: 1,
-                    stagger: 0.05,
-                    duration: 2,
-                    ease: Power3.easeInOut,
-                },
-                "=-1"
-            )
-
-            .fromTo(
-                "#nav-button-wrapper",
-                {
-                    display: "block",
-                    y: 20,
-                    opacity: 0,
-                },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: Power3.easeInOut,
-                },
-                "=-.8"
-            );
+            });
 
         return () => {
             timeline.kill();
@@ -158,44 +105,15 @@ export default function Home() {
 
     return (
         <PageTransition>
-            <PreLoader />
-            <div
-                className={`w-full h-screen relative overflow-hidden bg-white ${mainCursor}`}
-            >
-                <div className="z-10 w-full h-full absolute inset-0 overflow-hidden bg-white">
-                    <div className="absolute w-full h-full">
-                        {timelineCompleted && (
-                            <Cursor
-                                name="name-hover-cursor"
-                                width={250}
-                                height={250}
-                                className="z-10"
-                            >
-                                <AnimatePresence>
-                                    {cursorType === "nameHover" && (
-                                        <CursorElement />
-                                    )}
-                                </AnimatePresence>
-                            </Cursor>
-                        )}
-                        <div className="h-full relative container flex items-center justify-center">
-                            <div className="flex flex-col sm:flex-row sm:items-end justify-center">
-                                <Name
-                                    onMouseEnter={() =>
-                                        setCursorType("nameHover")
-                                    }
-                                    onMouseLeave={() => setCursorType("")}
-                                    nameLinkCursor={nameLinkCursor}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <main className={nameLinkCursor}>
+                <PreLoader />
 
-                <div className="z-20 absolute right-10 bottom-10 w-fit">
-                    <NavButton />
-                </div>
-            </div>
+                <HomeHero image={HeroImage} />
+
+                <div className="w-full h-[50vh]"></div>
+
+                <FooterHome />
+            </main>
         </PageTransition>
     );
 }

@@ -8,7 +8,7 @@ interface SpinningCircularTextProps {
     globeClassName?: string;
 }
 
-const SpinningCircularText = ({
+const SpinningCircularTextGlobe = ({
     className,
     circularTextClassName,
     globeClassName,
@@ -31,4 +31,4 @@ const SpinningCircularText = ({
     );
 };
 
-export default SpinningCircularText;
+export default SpinningCircularTextGlobe;

@@ -5,7 +5,7 @@ import { Globe } from "../svgs/Globe";
 import { ArrowRight } from "../svgs/ArrowRight";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import SpinningCircularText from "../SpinningCircularText";
+import SpinningCircularGlobe from "../SpinningCircularTextGlobe";
 import { ArrowDownLeft } from "../svgs/ArrowDownLeft";
 
 interface IntroTextProps {
@@ -72,7 +72,7 @@ export const IntroText = ({
     });
 
     return (
-        <section className="">
+        <section id="section-intro-text" className="container">
             <div className="lg:mb-24 relative">
                 <div className="w-4/5 sm:w-2/3 lg:w-1/2 max-w-3xl">
                     <p className="text-[14px] sm:text-[16px] lg:text-[18px] text-black opacity-30 font-normal">
@@ -83,7 +83,7 @@ export const IntroText = ({
                     </h2>
                 </div>
 
-                <SpinningCircularText
+                <SpinningCircularGlobe
                     className="hidden lg:block absolute top-6 right-14 w-[180px] h-[180px]"
                     globeClassName="w-[55px] h-[55px]"
                 />
@@ -93,13 +93,13 @@ export const IntroText = ({
                 ref={arrowTriggerResponsive}
                 className="w-full flex items-center lg:hidden justify-between relative py-14"
             >
-                <SpinningCircularText
+                <SpinningCircularGlobe
                     className="block lg:hidden w-[130px] sm:w-[150px] h-[130px] sm:h-[150px]"
                     globeClassName="w-[45px] h-[45px]"
                 />
 
                 <div ref={arrowResponsive}>
-                    <ArrowDownLeft className="w-[45px] xl:w-[64px] md:h-[45px] xl:h-[64px] text-highlight" />
+                    <ArrowDownLeft className="w-[45px] xl:w-[58px] md:h-[45px] xl:h-[58px] text-highlight" />
                 </div>
             </div>
 
