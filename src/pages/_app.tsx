@@ -1,14 +1,21 @@
 import "@/assets/styles/globals.scss";
 import "@/assets/styles/fonts.scss";
 import type { AppProps } from "next/app";
-import { LenisScroller } from "@/components/LenisScroller";
 import { AnimatePresence } from "framer-motion";
 import { Layout } from "@/components/Layout";
+import PreLoader from "@/components/PreLoader/PreLoader";
+import PreLoaderContextProvider, {
+    PreLoaderContext,
+} from "@/components/PreLoader/PreLoaderContext";
+import { useContext } from "react";
 
 export default function App({ Component, pageProps, router }: AppProps) {
+    const { preLoaderCompleted } = useContext(PreLoaderContext);
+
     return (
-        <>
+        <PreLoaderContextProvider>
             <Layout />
+            {!preLoaderCompleted && <PreLoader />}
 
             <AnimatePresence
                 mode="wait"
@@ -16,6 +23,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
             >
                 <Component key={router.route} {...pageProps} />
             </AnimatePresence>
-        </>
+        </PreLoaderContextProvider>
     );
 }

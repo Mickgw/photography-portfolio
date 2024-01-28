@@ -8,7 +8,7 @@ export const ArrowDown = (props: any) => {
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
                 id="SVGRepo_tracerCarrier"
                 strokeLinecap="round"
@@ -19,8 +19,8 @@ export const ArrowDown = (props: any) => {
                     <path
                         id="Vector"
                         d="M12 5V19M12 19L18 13M12 19L6 13"
-                        stroke="#000000"
-                        strokeWidth="1.4"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                     ></path>

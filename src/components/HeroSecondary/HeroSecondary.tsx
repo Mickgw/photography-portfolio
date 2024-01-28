@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
-import SpinningCircularTextArrow from "./SpinningCircularTextArrow";
+import { TextMarquee } from "../Marquee/TextMarquee";
 
-interface HomeHeroProps {
+interface HeroProps {
+    title?: string;
     image?: any;
 }
 
-const HomeHero = ({ image }: HomeHeroProps) => {
+const HeroSecondary = ({ title, image }: HeroProps) => {
     const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
 
@@ -34,13 +35,8 @@ const HomeHero = ({ image }: HomeHeroProps) => {
         <section
             ref={parallaxTrigger}
             id="section-hero"
-            className="cursor-pointer h-[650px] md:max-h-[600px] lg:h-[750px] xl:h-screen lg:min-h-screen relative overflow-hidden mb-32"
+            className="h-[650px] md:max-h-[600px] lg:h-[750px] xl:h-screen lg:min-h-screen relative overflow-hidden"
         >
-            <SpinningCircularTextArrow
-                className="w-[165px] h-[165px] absolute right-14 bottom-14 z-20"
-                globeClassName="w-[65px] h-[65px]"
-            />
-
             <div className="absolute z-10 bottom-0 w-full h-[150px] opacity-40 bg-gradient-to-t from-black to-transparent"></div>
             <motion.div
                 initial={{ scale: 1.2 }}
@@ -63,8 +59,33 @@ const HomeHero = ({ image }: HomeHeroProps) => {
                     className="object-cover object-[50%_10%]"
                 />
             </motion.div>
+
+            {title && (
+                <motion.div
+                    className="absolute bottom-0 lg:bottom-3 w-full overflow-hidden z-20"
+                    initial={{ y: 250, opacity: 0 }}
+                    animate={{
+                        y: 0,
+                        opacity: 1,
+
+                        transition: {
+                            delay: 0.6,
+                            duration: 1.3,
+                            ease: [0.33, 1, 0.68, 1],
+                        },
+                    }}
+                >
+                    <TextMarquee
+                        text={title}
+                        textColor="#ffffff"
+                        gap={50}
+                        initialDirection="right"
+                        className="lg:-mt-10 text-10xl"
+                    />
+                </motion.div>
+            )}
         </section>
     );
 };
 
-export default HomeHero;
+export default HeroSecondary;

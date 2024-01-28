@@ -41,6 +41,8 @@ const Albums = ({ albums }: any) => {
                     );
                 })}
             </div>
+            <div className="w-full min-h-screen"></div>
+            <div className="w-full min-h-screen"></div>
         </PageTransition>
     );
 };

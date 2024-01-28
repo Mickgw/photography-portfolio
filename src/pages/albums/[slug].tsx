@@ -2,22 +2,19 @@ import fs from "fs";
 import matter from "gray-matter";
 import { AlbumsImages } from "@/components/AlbumsImages";
 import PageTransition from "@/components/PageTransition";
-import { TextMarquee } from "@/components/Marquee/TextMarquee";
-import Image from "next/image";
-import { useEffect } from "react";
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { motion } from "framer-motion";
 import { IntroText } from "@/components/IntroText/IntroText";
-import Hero from "@/components/Hero/Hero";
 import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
+import HeroSecondary from "@/components/HeroSecondary/HeroSecondary";
+import { FooterAlbumSingle } from "@/components/Footer/FooterAlbumSingle";
 
 export default function AlbumPage({ contents }: any) {
     return (
         <PageTransition>
             <article className="page-contents">
-                <Hero title={contents?.title} image={contents?.thumbnail} />
+                <HeroSecondary
+                    title={contents?.title}
+                    image={contents?.thumbnail}
+                />
                 {/* <Breadcrumbs title={contents?.title} /> */}
 
                 <IntroText
@@ -32,6 +29,7 @@ export default function AlbumPage({ contents }: any) {
                 </section>
                 <div className="w-full h-screen" />
             </article>
+            <FooterAlbumSingle />
         </PageTransition>
     );
 }

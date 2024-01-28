@@ -1,11 +1,110 @@
 import React, { useContext, useEffect, useState } from "react";
+import { gsap, Power2 } from "gsap";
 import { HeaderText } from "./HeaderText";
 import { LoadingCounter } from "./LoadingCounter";
-import { gsap } from "gsap";
+import { PreLoaderContext } from "./PreLoaderContext";
 
 const PreLoader = () => {
+    const { setPreLoaderCompleted } = useContext(PreLoaderContext);
+
+    useEffect(() => {
+        const cont = { val: 0 };
+        const newValue = 100;
+        const timeline = gsap.timeline({
+            onComplete: () => {
+                setPreLoaderCompleted(true);
+                console.log("preLoaderCompleted = ", true);
+            },
+        });
+
+        timeline
+
+            .fromTo(
+                "#counter-wrapper",
+                {
+                    autoAlpha: 1,
+                    display: "flex",
+                    y: 100,
+                },
+                {
+                    y: 0,
+                    duration: 0.75,
+                    ease: Power2.easeInOut,
+                }
+            )
+            // Minus delay so that the counter and header are shown at the same time
+            .fromTo(
+                "#header-text #text",
+                {
+                    display: "block",
+                    y: 50,
+                },
+                {
+                    y: 0,
+                    duration: 1,
+                    ease: Power2.easeInOut,
+                },
+                "-=.75"
+            )
+            .to(cont, {
+                duration: 4,
+                val: newValue,
+                roundProps: { val: 1 },
+                onUpdate: function () {
+                    const currentElement = document.getElementById("count");
+
+                    if (currentElement) {
+                        currentElement.innerHTML = cont.val.toFixed(0);
+                    }
+                },
+            })
+            .fromTo(
+                "#counter-wrapper",
+                {
+                    opacity: 1,
+                },
+                {
+                    opacity: 0,
+                    duration: 0.5,
+                }
+            )
+            // Minus delay so that the counter and header are hidden again at the same time
+            .fromTo(
+                "#header-text #text",
+                {
+                    opacity: 1,
+                },
+                {
+                    opacity: 0,
+                    duration: 0.7,
+                },
+                "-=0.5"
+            )
+            .fromTo(
+                ".pre-loader-wrapper",
+                {
+                    height: "100%",
+                },
+                {
+                    height: 0,
+                    duration: 1,
+                    ease: Power2.easeInOut,
+                },
+                "-=0.5"
+            )
+            // Completely hide the counter and header
+            .to("#counter--container, #header-text-wrapper", {
+                display: "none",
+                duration: 0,
+            });
+
+        return () => {
+            timeline.kill();
+        };
+    }, []);
+
     return (
-        <div className="pre-loader-wrapper fixed w-full h-full inset-0 bg-black z-[100]">
+        <div className="pre-loader-wrapper fixed w-full h-full inset-0 bg-black z-[100] overflow-hidden">
             <HeaderText />
             <LoadingCounter />
         </div>

@@ -5,7 +5,7 @@ export default function Document() {
         <Html lang="en">
             <link
                 rel="preload"
-                href="Mona-Sans.woff2"
+                href="/mona_sans/Mona-Sans.woff2"
                 as="font"
                 type="font/woff2"
             ></link>

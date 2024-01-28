@@ -22,7 +22,7 @@ export const ArrowDownLeft = (props: any) => {
                         id="Vector"
                         d="M17 7L7 17M7 17H15M7 17V9"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                     ></path>
