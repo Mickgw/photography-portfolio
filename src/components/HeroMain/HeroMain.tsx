@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 import SpinningCircularTextArrow from "./SpinningCircularTextArrow";
+import { useGSAP } from "@gsap/react";
 
 interface HomeHeroProps {
     image?: any;
@@ -16,7 +17,7 @@ const HeroMain = ({ image }: HomeHeroProps) => {
     const overlay = useRef() as React.RefObject<HTMLDivElement>;
     const heroText = useRef() as React.RefObject<HTMLDivElement>;
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         let timeline = gsap.timeline({
@@ -105,6 +106,7 @@ const HeroMain = ({ image }: HomeHeroProps) => {
                     src={image}
                     alt="hero image"
                     fill
+                    quality={100}
                     priority
                     className="object-cover object-[50%_50%]"
                 />
@@ -134,7 +136,7 @@ const HeroMain = ({ image }: HomeHeroProps) => {
                 <p className="text-white text-2xl text-expanded mb-4">
                     some photo's by
                 </p>
-                <h1 className=" text-white leading-[1] text-expanded -ml-1">
+                <h1 className="hero-main-title text-white leading-[1] text-expanded !text-8xl -ml-1">
                     Mick Waanders
                 </h1>
             </div>

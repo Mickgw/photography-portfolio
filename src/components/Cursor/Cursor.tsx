@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import useMousePosition from "./hooks/useMousePosition";
 import {
     setClassname,
@@ -9,6 +9,7 @@ import {
     setXandYposition,
 } from "./lib/helpers";
 import { CursorPositionProps, CursorProps } from "./lib/props";
+import { useGSAP } from "@gsap/react";
 
 /**
  * Custom cursor component that follows the mouse cursor's position.
@@ -43,7 +44,7 @@ const Cursor: React.FC<CursorProps> = ({
     const xOffset = setCursorXoffset(width as number);
     const yOffset = setCursorYoffset(height as number);
 
-    useEffect(() => {
+    useGSAP(() => {
         setXandYposition({
             cursorRef,
             x,

@@ -35,7 +35,7 @@ export default function AlbumPage({ contents }: any) {
 }
 
 export async function getStaticPaths() {
-    const folder = "albums/";
+    const folder = "content/";
     const files = fs.readdirSync(folder);
     const markdownPosts = files.filter((file) => file.endsWith(".md"));
 
@@ -52,7 +52,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }: any) {
-    const folder = "albums/";
+    const folder = "content/";
     const readFile = fs.readFileSync(`${folder}${slug}.md`, "utf8");
     const { data: contents } = matter(readFile);
 

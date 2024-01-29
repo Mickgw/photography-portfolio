@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import SpinningCircularGlobe from "../SpinningCircularTextGlobe";
 import { ArrowDownLeft } from "../svgs/ArrowDownLeft";
+import { useGSAP } from "@gsap/react";
 
 interface IntroTextProps {
     year: string;
@@ -30,7 +31,7 @@ export const IntroText = ({
         useRef() as React.RefObject<HTMLDivElement>;
     const mainWrapperTrigger = useRef() as React.RefObject<HTMLDivElement>;
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         let timelineDesktop = gsap.timeline();

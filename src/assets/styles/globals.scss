@@ -68,6 +68,10 @@ h6 {
     @apply mx-auto font-semibold;
 }
 
+.hero-main-title {
+    font-size: clamp(2.8125rem, 1.6518rem + 5.8036vw, 6.875rem) !important;
+}
+
 .spinning-circular-text {
     animation-name: spinning_circular_text;
     animation-duration: 14s;
