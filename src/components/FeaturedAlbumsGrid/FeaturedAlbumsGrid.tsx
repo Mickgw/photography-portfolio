@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-export const FeaturedAlbumsGrid = () => {
+export const FeaturedAlbumsGrid = ({ featuredAlbums }: any) => {
     const gridWrapperTrigger = useRef() as React.RefObject<HTMLDivElement>;
     const scrollContainerLeft = useRef() as React.RefObject<HTMLDivElement>;
     const scrollContainerRight = useRef() as React.RefObject<HTMLDivElement>;
@@ -35,6 +35,11 @@ export const FeaturedAlbumsGrid = () => {
 
     return (
         <section ref={gridWrapperTrigger} className="container py-22 lg:py-44">
+            {featuredAlbums.map((album: any, index: number) => {
+                console.log(album);
+                return <h1>{album?.albumContents?.title}</h1>;
+            })}
+
             <div className="grid grid-cols-2 gap-8 border border-black">
                 <div
                     ref={scrollContainerLeft}

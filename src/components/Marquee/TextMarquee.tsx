@@ -80,43 +80,39 @@ export const TextMarquee = ({
         requestAnimationFrame(animation);
     };
 
-    if (text) {
-        return (
-            <div className={` ${className}`}>
-                <div ref={sliderRef} className={marqueeWrapperClass}>
-                    <div ref={firstText} className={marqueePartClass}>
-                        <TextWithSpacer
-                            text={text}
-                            textColor={textColor}
-                            gap={gap}
-                        />
-                        <TextWithSpacer
-                            text={text}
-                            textColor={textColor}
-                            gap={gap}
-                        />
-                    </div>
+    return (
+        <div className={` ${className}`}>
+            <div ref={sliderRef} className={marqueeWrapperClass}>
+                <div ref={firstText} className={marqueePartClass}>
+                    <TextWithSpacer
+                        text={text}
+                        textColor={textColor}
+                        gap={gap}
+                    />
+                    <TextWithSpacer
+                        text={text}
+                        textColor={textColor}
+                        gap={gap}
+                    />
+                </div>
 
-                    <div
-                        ref={secondText}
-                        className={marqueePartClass}
-                        style={{ left: `${offsetWidth}px` }}
-                    >
-                        <TextWithSpacer
-                            text={text}
-                            textColor={textColor}
-                            gap={gap}
-                        />
-                        <TextWithSpacer
-                            text={text}
-                            textColor={textColor}
-                            gap={gap}
-                        />
-                    </div>
+                <div
+                    ref={secondText}
+                    className={marqueePartClass}
+                    style={{ left: `${offsetWidth}px` }}
+                >
+                    <TextWithSpacer
+                        text={text}
+                        textColor={textColor}
+                        gap={gap}
+                    />
+                    <TextWithSpacer
+                        text={text}
+                        textColor={textColor}
+                        gap={gap}
+                    />
                 </div>
             </div>
-        );
-    } else {
-        return null;
-    }
+        </div>
+    );
 };

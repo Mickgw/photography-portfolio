@@ -3,10 +3,9 @@ import HeroImage from "../../public/images/hero_main_img_hRes.webp";
 import { FooterHome } from "@/components/Footer/FooterHome";
 import HeroMain from "@/components/HeroMain/HeroMain";
 import { FeaturedAlbumsGrid } from "@/components/FeaturedAlbumsGrid/FeaturedAlbumsGrid";
-
-import fs from "fs";
 import { promises as fsPromises } from "fs";
 import matter from "gray-matter";
+import { folderNames } from "@/lib/consts";
 
 export default function Home({ featuredAlbums }: any) {
     console.log("featuredAlbums = ", featuredAlbums);
@@ -15,7 +14,7 @@ export default function Home({ featuredAlbums }: any) {
             <main>
                 <HeroMain image={HeroImage} />
 
-                <FeaturedAlbumsGrid />
+                <FeaturedAlbumsGrid featuredAlbums={featuredAlbums} />
 
                 {/* <div className="w-full h-[100vh]">
                     <div className="container">
@@ -30,27 +29,29 @@ export default function Home({ featuredAlbums }: any) {
 }
 
 export async function getStaticProps() {
-    const folder = "content/";
-
     const readFile = await fsPromises.readFile(
-        `${folder}featured-albums.md`,
+        `${folderNames.main}featured-albums.md`,
         "utf8"
     );
     const { data: contents } = matter(readFile);
 
     const albums = contents.albums;
-    const featuredAlbums = [];
 
-    for (const album of albums) {
-        const albumFileName = `${folder}${album}`;
-        const readFile = fs.readFileSync(`${albumFileName}.md`, "utf8");
-        const { data: albumsContents } = matter(readFile);
+    const featuredAlbumsPromises = albums.map(async (album: any) => {
+        const albumFileName = `${folderNames.albums}${album}`;
+        const readFile = await fsPromises.readFile(
+            `${albumFileName}.md`,
+            "utf8"
+        );
+        const { data: albumContents } = matter(readFile);
 
-        featuredAlbums.push({
+        return {
             albumFileName,
-            albumsContents,
-        });
-    }
+            albumContents,
+        };
+    });
+
+    const featuredAlbums = await Promise.all(featuredAlbumsPromises);
 
     return {
         props: {

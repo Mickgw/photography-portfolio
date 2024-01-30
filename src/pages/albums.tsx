@@ -3,15 +3,18 @@ import fs from "fs";
 import matter from "gray-matter";
 import { AlbumPreview } from "@/components/AlbumPreviews/AlbumPreview";
 import PageTransition from "@/components/PageTransition";
+import { folderNames } from "@/lib/consts";
 
 export async function getStaticProps() {
-    const folder = "albums/";
-    const files = fs.readdirSync(folder);
+    const files = fs.readdirSync(folderNames.albums);
     const markdownPosts = files.filter((file) => file.endsWith(".md"));
 
     const albums = markdownPosts.map((fileName) => {
         const slug = fileName.replace(".md", "");
-        const readFile = fs.readFileSync(`${folder}${fileName}`, "utf8");
+        const readFile = fs.readFileSync(
+            `${folderNames.albums}${fileName}`,
+            "utf8"
+        );
         const { data: contents } = matter(readFile);
 
         return {
