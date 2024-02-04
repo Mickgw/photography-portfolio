@@ -1,13 +1,13 @@
 import fs from "fs";
 import { promises as fsPromises } from "fs";
 import matter from "gray-matter";
-import { AlbumsImages } from "@/components/AlbumsImages";
+import { AlbumsImages } from "@/components/AlbumImages/AlbumsImages";
 import PageTransition from "@/components/PageTransition";
 import { IntroText } from "@/components/IntroText/IntroText";
-import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
 import HeroSecondary from "@/components/HeroSecondary/HeroSecondary";
 import { FooterAlbumSingle } from "@/components/Footer/FooterAlbumSingle";
 import { folderNames } from "@/lib/consts";
+import { useEffect } from "react";
 
 export default function AlbumPage({ albumContents, albumPhotos }: any) {
     return (
@@ -16,8 +16,8 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                 <HeroSecondary
                     title={albumContents?.title}
                     image={albumContents?.thumbnail}
+                    objectPositionHero={albumContents?.objectPositionHero}
                 />
-                {/* <Breadcrumbs title={contents?.title} /> */}
 
                 <IntroText
                     year={albumContents?.year}
@@ -26,7 +26,7 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                     description={albumContents?.description}
                 />
 
-                <section className="container">
+                <section className="container py-32 overflow-hidden">
                     <AlbumsImages
                         albumFolder={albumContents?.imagesFolder}
                         albumPhotos={albumPhotos}
@@ -59,9 +59,7 @@ export async function getStaticProps({ params: { slug } }: any) {
     const readFile = fs.readFileSync(`${folderNames.albums}${slug}.md`, "utf8");
     const { data: albumContents } = matter(readFile);
 
-    const photoAlbumFolderName = `public${folderNames.images}/${albumContents.imagesFolder}`;
-
-    console.log("photoAlbumFolderName = ", photoAlbumFolderName);
+    const photoAlbumFolderName = `public/images/${albumContents.imagesFolder}`;
 
     try {
         const files = await fsPromises.readdir(photoAlbumFolderName);

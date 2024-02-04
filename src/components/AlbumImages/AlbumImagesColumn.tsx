@@ -1,30 +1,32 @@
 import Image from "next/image";
-import React from "react";
-import { folderNames } from "@/lib/consts";
 
-interface AlbumsImagesProps {
+interface AlbumImagesColumnProps {
+    images: Array<any>;
     albumFolder: string;
-    albumPhotos: any;
+    className?: string;
 }
 
-export const AlbumsImages = ({
+export const AlbumImagesColumn = ({
+    images,
     albumFolder,
-    albumPhotos,
-}: AlbumsImagesProps) => {
+    className,
+}: AlbumImagesColumnProps) => {
     return (
-        <div className="columns-4 gap-x-4 gap-y-4 py-32">
-            {albumPhotos?.map((image: any, index: number) => {
+        <div className={`${className ? className : ""} flex flex-col gap-12`}>
+            {images?.map((image: any, index: number) => {
                 return (
                     <div
                         key={index}
-                        className="relative mb-6 rounded-lg overflow-hidden"
+                        className="relative rounded-lg overflow-hidden"
                     >
                         <Image
-                            src={`/${folderNames.images}/${albumFolder}/${image}`}
+                            src={`/images/${albumFolder}/${image}`}
                             alt=""
                             width={100}
                             height={100}
                             priority
+                            placeholder="blur"
+                            blurDataURL={`/images/${albumFolder}/${image}`}
                             sizes="(max-width: 768px) 45vw, 25vw"
                             className="w-full h-full object-cover object-center"
                         />

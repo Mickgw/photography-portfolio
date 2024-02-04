@@ -39,28 +39,10 @@ export function setEasingDuration(duration : number) {
     if(duration) {
         easingDuration = duration;
     } else {
-        easingDuration = 0.4;
+        easingDuration = 2;
     }
 
     return easingDuration;
-}
-
-/**
- * Returns easing duration in case user enters nothing.
- *
- * @param {Array<number>} ease - The easing values for the cursor movement.
- * @returns {Array<number>} The easing values depending on user input.
- */
-export function setEasingValues(ease : Array<number>) {
-    let easingValues;
-
-    if(ease) {
-        easingValues = ease;
-    } else {
-        easingValues = [0.05,0.03,0.3,0.96];
-    }
-
-    return easingValues;
 }
 
 
@@ -110,5 +92,3 @@ export function setXandYposition({cursorRef, x, xOffset, y, yOffset } : CursorPo
 }
 
   
-
-

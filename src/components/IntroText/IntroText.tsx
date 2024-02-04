@@ -165,10 +165,12 @@ export const IntroText = ({
 
             <div className="mb-10 lg:mb-16">
                 {subtitle && (
-                    <h4 className="text-hightlight mb-4">{subtitle}</h4>
+                    <h4 className="text-hightlight mb-2 font-normal text-semi-expanded">
+                        {subtitle}
+                    </h4>
                 )}
 
-                <div className="w-full h-[1px] bg-slate-300"></div>
+                <div className="w-full h-[1px] bg-slate-200"></div>
             </div>
 
             {description && (
@@ -176,7 +178,7 @@ export const IntroText = ({
                     ref={arrowTrigger}
                     className="relative lg:flex lg:items-end lg:justify-end text-highlight pr-4 md:pr-6 xl:pr-10"
                 >
-                    <Paragraph className="w-full md:w-1/2 max-w-3xl text-xl xl:text-2xl font-normal gap-x-[5px] xl:gap-x-[7px] gap-y-[6px] xl:gap-y-[7px] pr-8 md:pr-0">
+                    <Paragraph className="w-full md:w-1/2 max-w-3xl font-normal text-xl xl:text-[26px] gap-x-[5px] xl:gap-x-[7px] gap-y-[6px] xl:gap-y-[7px] pr-8 md:pr-0">
                         {description}
                     </Paragraph>
 
@@ -184,7 +186,7 @@ export const IntroText = ({
                         ref={arrowDesktop}
                         className="hidden lg:block absolute left-2 xl:left-4 bottom-2s xl:bottom-4"
                     >
-                        <ArrowRight className="w-[45px] xl:w-[64px] md:h-[45px] xl:h-[64px] text-highlight" />
+                        <ArrowRight className="w-[45px] xl:w-[60px] md:h-[45px] xl:h-[60px] text-highlight" />
                     </div>
                 </div>
             )}

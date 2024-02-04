@@ -7,6 +7,18 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+        // you can configure the container to be centered
+        center: true,
+  
+        // or have default horizontal padding
+        padding: '1rem',
+  
+        // default breakpoints but with 40px removed
+        screens: {
+          '5xl': '2300px',
+        },
+      },
     extend: {
         fontSize: {
             '10xl': "clamp(4.6875rem, 2.859rem + 5.8511vw, 8.125rem)",

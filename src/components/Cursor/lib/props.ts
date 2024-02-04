@@ -30,11 +30,6 @@ export interface CursorProps {
     style?: React.CSSProperties;
 
     /**
-     * An array representing easing values for cursor transitions.
-     */
-    ease?: Array<number>;
-
-    /**
      * The duration of the cursor's transition.
      */
     easingDuration?: number;

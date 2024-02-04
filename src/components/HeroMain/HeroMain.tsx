@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 import SpinningCircularTextArrow from "./SpinningCircularTextArrow";
 import { useGSAP } from "@gsap/react";
+import { ArrowDownRight } from "../svgs/ArrowDownRight";
 
 interface HomeHeroProps {
     image?: any;
@@ -15,7 +16,7 @@ const HeroMain = ({ image }: HomeHeroProps) => {
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
     const spinningMarqueeArrow = useRef() as React.RefObject<HTMLDivElement>;
     const overlay = useRef() as React.RefObject<HTMLDivElement>;
-    const heroText = useRef() as React.RefObject<HTMLDivElement>;
+    const arrowDownRight = useRef() as React.RefObject<HTMLDivElement>;
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -59,19 +60,19 @@ const HeroMain = ({ image }: HomeHeroProps) => {
                 }
             )
 
-            .to(heroText.current, {
-                opacity: 0,
+            .to(spinningMarqueeArrow.current, {
+                bottom: "150px",
                 ease: "none",
                 scrollTrigger: {
                     trigger: parallaxTrigger.current,
                     start: "top top",
-                    end: "center-=200 top",
+                    end: "bottom top",
                     scrub: true,
                 },
             })
 
-            .to(spinningMarqueeArrow.current, {
-                bottom: "150px",
+            .to(arrowDownRight.current, {
+                rotate: 90,
                 ease: "none",
                 scrollTrigger: {
                     trigger: parallaxTrigger.current,
@@ -129,10 +130,13 @@ const HeroMain = ({ image }: HomeHeroProps) => {
                 />
             </div>
 
-            <div
-                ref={heroText}
-                className="absolute top-1/2 -translate-y-1/2 -mt-40 left-4 md:left-8 lg:left-12 xl:left-16 z-30"
-            >
+            <div className="absolute top-1/2 -translate-y-1/2 -mt-40 left-4 md:left-8 lg:left-12 xl:left-16 z-30">
+                <div
+                    ref={arrowDownRight}
+                    className="absolute z-30 -top-32 left-0"
+                >
+                    <ArrowDownRight className=" w-[50px] h-[50px] text-white" />
+                </div>
                 <p className="text-white text-2xl text-expanded mb-4">
                     some photo's by
                 </p>

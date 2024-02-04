@@ -7,20 +7,22 @@ import PreLoader from "@/components/PreLoader/PreLoader";
 import PreLoaderContextProvider, {
     PreLoaderContext,
 } from "@/components/PreLoader/PreLoaderContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import CursorContextProvider from "@/components/Cursor/context/CursorContext";
 
 export default function App({ Component, pageProps, router }: AppProps) {
     const { preLoaderCompleted } = useContext(PreLoaderContext);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <PreLoaderContextProvider>
             <Layout />
             {!preLoaderCompleted && <PreLoader />}
 
-            <AnimatePresence
-                mode="wait"
-                onExitComplete={() => window.scrollTo(0, 0)}
-            >
+            <AnimatePresence mode="wait">
                 <Component key={router.route} {...pageProps} />
             </AnimatePresence>
         </PreLoaderContextProvider>

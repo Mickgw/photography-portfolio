@@ -1,80 +1,65 @@
-import { useRef } from "react";
-import useMousePosition from "./hooks/useMousePosition";
-import {
-    setClassname,
-    setCursorXoffset,
-    setCursorYoffset,
-    setEasingDuration,
-    setEasingValues,
-    setXandYposition,
-} from "./lib/helpers";
-import { CursorPositionProps, CursorProps } from "./lib/props";
-import { useGSAP } from "@gsap/react";
+import { useCallback, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { setClassname, setEasingDuration } from "./lib/helpers";
+import { CursorProps } from "./lib/props";
+import { Expo } from "gsap";
 
-/**
- * Custom cursor component that follows the mouse cursor's position.
- *
- * @component
- * @param {Object} props - The props for the Cursor component.
- * @param {string} props.name - The name of the cursor.
- * @param {number} props.width - The width of the cursor.
- * @param {number} props.height - The height of the cursor.
- * @param {number} props.zIndex - The z-index of the cursor.
- * @param {Object} props.style - Additional inline CSS styles for the cursor.
- * @param {Array<number>} props.ease - An array representing easing values for cursor transitions.
- * @param {number} props.easingDuration - The duration of the cursor's transition.
- * @param {React.ReactNode} props.children - Content to be rendered inside the cursor.
- * @param {string} props.className - Additional CSS class names for the cursor.
- * @returns {React.ReactNode|null} The Cursor component.
- */
 const Cursor: React.FC<CursorProps> = ({
     name,
     width,
     height,
     zIndex,
     style,
-    ease,
     easingDuration,
     children,
     className,
 }: CursorProps) => {
-    const { x, y } = useMousePosition();
-    const cursorRef = useRef<HTMLDivElement | null>(null);
+    const cursorRef = useRef<HTMLDivElement>(null);
 
-    const xOffset = setCursorXoffset(width as number);
-    const yOffset = setCursorYoffset(height as number);
+    useEffect(() => {
+        const cursor = cursorRef.current;
 
-    useGSAP(() => {
-        setXandYposition({
-            cursorRef,
-            x,
-            xOffset,
-            y,
-            yOffset,
-        } as CursorPositionProps);
-    }, [x, y, xOffset, yOffset]);
+        const pos = { x: 0, y: 0 };
 
-    if (x === 0 || y === 0) {
-        return null;
-    }
+        const loop = () => {
+            gsap.set(cursor, { x: pos.x, y: pos.y });
+        };
+
+        gsap.ticker.add(loop);
+
+        const setFromEvent = (e: MouseEvent) => {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            gsap.to(pos, {
+                x: x - (width as number) / 2,
+                y: y - (height as number) / 2,
+                duration: setEasingDuration(easingDuration as number),
+                ease: Expo.easeOut,
+            });
+        };
+
+        window.addEventListener("mousemove", setFromEvent);
+
+        return () => {
+            gsap.ticker.remove(loop);
+            window.removeEventListener("mousemove", setFromEvent);
+        };
+    }, []);
 
     return (
         <div
             ref={cursorRef}
+            id="custom-cursor"
             style={{
-                position: "fixed",
-                pointerEvents: "none",
                 zIndex: zIndex,
-                left: 0,
-                top: 0,
                 width: `${width}px`,
                 height: `${height}px`,
-                transition: `${setEasingDuration(
-                    easingDuration as number
-                )}s cubic-bezier(${setEasingValues(ease as Array<number>)})`,
                 ...style,
             }}
-            className={`cursor_${name} ${setClassname(className as string)}`}
+            className={`custom-cursor cursor-type-${name} ${setClassname(
+                className as string
+            )}`}
         >
             {children}
         </div>

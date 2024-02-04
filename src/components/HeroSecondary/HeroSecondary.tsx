@@ -8,9 +8,10 @@ import { TextMarquee } from "../Marquee/TextMarquee";
 interface HeroProps {
     title?: string;
     image?: any;
+    objectPositionHero?: string;
 }
 
-const HeroSecondary = ({ title, image }: HeroProps) => {
+const HeroSecondary = ({ title, image, objectPositionHero }: HeroProps) => {
     const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
 
@@ -57,6 +58,11 @@ const HeroSecondary = ({ title, image }: HeroProps) => {
                     fill
                     priority
                     className="object-cover object-[50%_10%]"
+                    style={{
+                        objectPosition: objectPositionHero
+                            ? objectPositionHero
+                            : "center",
+                    }}
                 />
             </motion.div>
 
@@ -79,6 +85,7 @@ const HeroSecondary = ({ title, image }: HeroProps) => {
                         text={title}
                         textColor="#ffffff"
                         gap={50}
+                        speed={0.03}
                         initialDirection="right"
                         className="lg:-mt-10 text-10xl"
                     />

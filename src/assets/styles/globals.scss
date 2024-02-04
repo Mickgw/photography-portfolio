@@ -7,7 +7,11 @@ html {
 }
 
 .container {
-    @apply max-w-none px-4 md:px-8 lg:px-12 xl:px-16;
+    @apply px-4 lg:px-8 lg:px-12 xl:px-16;
+
+    @media (max-width: 1500px) {
+        max-width: none !important;
+    }
 }
 
 body {
@@ -70,6 +74,13 @@ h6 {
 
 .hero-main-title {
     font-size: clamp(2.8125rem, 1.6518rem + 5.8036vw, 6.875rem) !important;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 }
 
 .spinning-circular-text {

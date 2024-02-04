@@ -6,24 +6,35 @@ import { FeaturedAlbumsGrid } from "@/components/FeaturedAlbumsGrid/FeaturedAlbu
 import { promises as fsPromises } from "fs";
 import matter from "gray-matter";
 import { folderNames } from "@/lib/consts";
+import CursorContextProvider from "@/components/Cursor/context/CursorContext";
 
 export default function Home({ featuredAlbums }: any) {
-    console.log("featuredAlbums = ", featuredAlbums);
     return (
         <PageTransition>
-            <main>
+            <CursorContextProvider>
                 <HeroMain image={HeroImage} />
+
+                <div className="container flex gap-32 pt-12 pb-32">
+                    <div className="w-2/3">
+                        <p className="text-3xl font-normal leading-[1.4]">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat.
+                        </p>
+                    </div>
+                    <div className="w-1/3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis.
+                    </div>
+                </div>
 
                 <FeaturedAlbumsGrid featuredAlbums={featuredAlbums} />
 
-                {/* <div className="w-full h-[100vh]">
-                    <div className="container">
-                        <h1>Container</h1>
-                    </div>
-                </div> */}
-
                 <FooterHome />
-            </main>
+            </CursorContextProvider>
         </PageTransition>
     );
 }
@@ -37,16 +48,22 @@ export async function getStaticProps() {
 
     const albums = contents.albums;
 
+    if (!Array.isArray(albums) || albums.length === 0) {
+        throw new Error("No featured albums found.");
+    }
+
     const featuredAlbumsPromises = albums.map(async (album: any) => {
+        const albumFileNameForSlug = album;
         const albumFileName = `${folderNames.albums}${album}`;
         const readFile = await fsPromises.readFile(
             `${albumFileName}.md`,
             "utf8"
         );
+
         const { data: albumContents } = matter(readFile);
 
         return {
-            albumFileName,
+            albumFileNameForSlug,
             albumContents,
         };
     });
