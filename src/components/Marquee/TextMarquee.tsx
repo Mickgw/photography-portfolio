@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { TextSpacer } from "./TextSpacer";
 import { TextWithSpacer } from "./TextWithSpacer";
 import { getDirection } from "./lib/helpers";
+import { useGSAP } from "@gsap/react";
 
 interface TextMarqueeProps {
     // Required
@@ -39,7 +39,7 @@ export const TextMarquee = ({
     let direction = getDirection(initialDirection);
     let xPercent = 0;
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         requestAnimationFrame(animation);
 
@@ -62,6 +62,10 @@ export const TextMarquee = ({
     }, [text]);
 
     const animation = () => {
+        if (!firstText.current && !secondText.current) {
+            return;
+        }
+
         if (xPercent <= -100) {
             xPercent = 0;
         }

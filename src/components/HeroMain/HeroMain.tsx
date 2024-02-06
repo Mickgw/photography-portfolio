@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
+import { gsap, Expo } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 import SpinningCircularTextArrow from "./SpinningCircularTextArrow";
@@ -12,16 +12,62 @@ interface HomeHeroProps {
 }
 
 const HeroMain = ({ image }: HomeHeroProps) => {
-    const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
+    const parallaxTrigger = useRef<HTMLDivElement>(null);
+
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
-    const spinningMarqueeArrow = useRef() as React.RefObject<HTMLDivElement>;
-    const overlay = useRef() as React.RefObject<HTMLDivElement>;
-    const arrowDownRight = useRef() as React.RefObject<HTMLDivElement>;
+    const spinningMarqueeArrow = useRef<HTMLDivElement>(null);
+    const overlay = useRef<HTMLDivElement>(null);
+    const arrowDownRight = useRef<HTMLDivElement>(null);
+    const heroTextRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        let timeline = gsap.timeline({
+        let timeline = gsap.timeline();
+
+        timeline
+            .fromTo(
+                parallaxImage.current,
+                {
+                    scale: 1.5,
+                    objectPosition: "50% 0%",
+                },
+                {
+                    scale: 1,
+                    objectPosition: "50% 100%",
+                    duration: 2,
+                    delay: 0.75,
+                    ease: "power4.out",
+                }
+            )
+
+            .fromTo(
+                heroTextRef.current,
+                {
+                    y: 400,
+                },
+                {
+                    y: 0,
+                    duration: 1.4,
+                    ease: "power4.out",
+                },
+                "-=1.9"
+            )
+
+            .fromTo(
+                spinningMarqueeArrow.current,
+                {
+                    y: 400,
+                },
+                {
+                    y: 0,
+                    duration: 1.4,
+                    ease: "power4.out",
+                },
+                "-=1.9"
+            );
+
+        let scrollTriggerTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: parallaxTrigger.current,
                 start: "top top",
@@ -30,10 +76,9 @@ const HeroMain = ({ image }: HomeHeroProps) => {
             },
         });
 
-        timeline
+        scrollTriggerTimeline
             .to(parallaxImage.current, {
-                yPercent: 30,
-                scale: 1.1,
+                yPercent: 20,
                 ease: "none",
                 scrollTrigger: {
                     trigger: parallaxTrigger.current,
@@ -60,8 +105,8 @@ const HeroMain = ({ image }: HomeHeroProps) => {
                 }
             )
 
-            .to(spinningMarqueeArrow.current, {
-                bottom: "150px",
+            .to(".arrow-down", {
+                rotate: 45,
                 ease: "none",
                 scrollTrigger: {
                     trigger: parallaxTrigger.current,
@@ -72,12 +117,12 @@ const HeroMain = ({ image }: HomeHeroProps) => {
             })
 
             .to(arrowDownRight.current, {
-                rotate: 90,
+                rotate: 45,
                 ease: "none",
                 scrollTrigger: {
                     trigger: parallaxTrigger.current,
                     start: "top top",
-                    end: "bottom top",
+                    end: "bottom-=300 top",
                     scrub: true,
                 },
             });
@@ -90,18 +135,7 @@ const HeroMain = ({ image }: HomeHeroProps) => {
             className="h-[650px] md:max-h-[600px] lg:h-[750px] xl:h-screen lg:min-h-screen relative overflow-hidden mb-32"
         >
             {/* Z-10 */}
-            <motion.div
-                initial={{ scale: 1.2 }}
-                animate={{
-                    scale: 1,
-                    transition: {
-                        delay: 0.4,
-                        duration: 1.7,
-                        ease: [0.76, 0, 0.24, 1],
-                    },
-                }}
-                className="w-full h-full inset-0 overflow-hidden absolute z-10"
-            >
+            <div className="w-full h-full inset-0 overflow-hidden absolute z-10">
                 <Image
                     ref={parallaxImage}
                     src={image}
@@ -109,38 +143,42 @@ const HeroMain = ({ image }: HomeHeroProps) => {
                     fill
                     quality={100}
                     priority
-                    className="object-cover object-[50%_50%]"
+                    className="object-cover"
                 />
-            </motion.div>
+            </div>
 
             {/* Z-20 */}
             <div
                 ref={overlay}
-                className="bg-black/40 absolute w-full h-full inset-0 z-20"
+                className="bg-gradient-to-t from-black/80 to-transparent absolute w-full h-[500px] bottom-0 z-20"
             ></div>
 
             {/* Z-30 */}
             <div
                 ref={spinningMarqueeArrow}
-                className="absolute right-4 md:right-8 lg:right-12 xl:right-16 bottom-14 z-30"
+                className="absolute right-4 md:right-8 lg:right-12 xl:right-16 bottom-12 z-30"
             >
                 <SpinningCircularTextArrow
-                    className="w-[140px] h-[140px] "
-                    globeClassName="w-[53px] h-[53px]"
+                    className="w-[150px] h-[150px] "
+                    arrowClassName="w-[60px] h-[60px]"
                 />
             </div>
 
-            <div className="absolute top-1/2 -translate-y-1/2 -mt-40 left-4 md:left-8 lg:left-12 xl:left-16 z-30">
+            {/* Z-30 */}
+            <div
+                ref={heroTextRef}
+                className="absolute bottom-12 -mt-28 left-4 md:left-8 lg:left-12 xl:left-16 z-30"
+            >
                 <div
                     ref={arrowDownRight}
-                    className="absolute z-30 -top-32 left-0"
+                    className="absolute z-30 -top-24 left-0"
                 >
                     <ArrowDownRight className=" w-[50px] h-[50px] text-white" />
                 </div>
                 <p className="text-white text-2xl text-expanded mb-4">
                     some photo's by
                 </p>
-                <h1 className="hero-main-title text-white leading-[1] text-expanded !text-8xl -ml-1">
+                <h1 className="text-white  leading-[.8] overflow-hidden relative text-expanded 2xl:font-semibold !text-8xl 2xl:!text-10xl -ml-1">
                     Mick Waanders
                 </h1>
             </div>

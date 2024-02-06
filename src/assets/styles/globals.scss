@@ -7,7 +7,7 @@ html {
 }
 
 .container {
-    @apply px-4 lg:px-8 lg:px-12 xl:px-16;
+    @apply px-4 lg:px-8 xl:px-12 2xl:px-16;
 
     @media (max-width: 1500px) {
         max-width: none !important;
@@ -15,7 +15,7 @@ html {
 }
 
 body {
-    background-color: white;
+    @apply bg-white overflow-hidden overflow-x-hidden overflow-y-hidden;
 }
 
 .text-expanded {
@@ -77,10 +77,13 @@ h6 {
 }
 
 .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
+    @apply hidden lg:block fixed top-0 left-0 pointer-events-none;
+}
+
+.featured-album-card {
+    @media (max-width: 768px) {
+        // aspect-ratio: 16/12 !important;
+    }
 }
 
 .spinning-circular-text {

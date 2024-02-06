@@ -5,13 +5,13 @@ import { ArrowDown } from "../svgs/ArrowDown";
 interface SpinningCircularTextProps {
     className?: string;
     circularTextClassName?: string;
-    globeClassName?: string;
+    arrowClassName?: string;
 }
 
 const SpinningCircularTextArrow = ({
     className,
     circularTextClassName,
-    globeClassName,
+    arrowClassName,
 }: SpinningCircularTextProps) => {
     return (
         <div className={`${className ? className : "w-[170px] h-[170px]"}`}>
@@ -22,8 +22,8 @@ const SpinningCircularTextArrow = ({
                     }`}
                 />
                 <ArrowDown
-                    className={`text-highlight absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 ${
-                        globeClassName ? globeClassName : ""
+                    className={`arrow-down text-highlight absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 ${
+                        arrowClassName ? arrowClassName : ""
                     }`}
                 />
             </div>

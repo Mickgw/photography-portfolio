@@ -5,14 +5,10 @@ import { useGSAP } from "@gsap/react";
 
 const PreLoader = () => {
     const { setPreLoaderCompleted } = useContext(PreLoaderContext);
-
     const preLoaderWrapper = useRef() as React.RefObject<HTMLDivElement>;
-
     const headerText = useRef() as React.RefObject<HTMLDivElement>;
-
     const count = useRef() as React.RefObject<HTMLDivElement>;
     const counterWrapper = useRef() as React.RefObject<HTMLDivElement>;
-    const counterContainer = useRef() as React.RefObject<HTMLDivElement>;
 
     useGSAP(() => {
         const cont = { val: 0 };

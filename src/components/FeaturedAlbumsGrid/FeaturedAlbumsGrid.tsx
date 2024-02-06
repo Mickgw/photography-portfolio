@@ -5,16 +5,16 @@ import { useGSAP } from "@gsap/react";
 import { FeaturedAlbumCard } from "./FeaturedAlbumCard/FeaturedAlbumCard";
 import Cursor from "../Cursor/Cursor";
 import { CursorContext } from "../Cursor/context/CursorContext";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "../svgs/ArrowUpRight";
-import { ParallaxElement } from "../ParallaxElement/ParallaxElement";
-import { TextMarquee } from "../Marquee/TextMarquee";
+import { AnimatePresence, motion, useInView } from "framer-motion";
+import { FeaturedAlbumsGridCursor } from "./FeaturedAlbumsGridCursor";
 
 export const FeaturedAlbumsGrid = ({ featuredAlbums }: any) => {
-    const gridWrapperTrigger = useRef() as React.RefObject<HTMLDivElement>;
-    const scrollContainerLeft = useRef() as React.RefObject<HTMLDivElement>;
-    const scrollContainerRight = useRef() as React.RefObject<HTMLDivElement>;
-    const { cursorType } = useContext(CursorContext);
+    const featuredAlbumsGrid = useRef<HTMLDivElement>(null);
+    const gridWrapperTrigger = useRef<HTMLDivElement>(null);
+    const scrollContainerLeft = useRef<HTMLDivElement>(null);
+    const scrollContainerRight = useRef<HTMLDivElement>(null);
+
+    const parentIsInView = useInView(featuredAlbumsGrid);
 
     const evenIndexedAlbums = featuredAlbums.filter(
         (_: any, index: number) => index % 2 === 0
@@ -25,126 +25,83 @@ export const FeaturedAlbumsGrid = ({ featuredAlbums }: any) => {
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
+        let breakpoint = gsap.matchMedia();
+        const scrollTriggerConfig = {
+            trigger: gridWrapperTrigger.current || "#gridWrapperTrigger",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+        };
 
-        let timeline = gsap.timeline({
+        let timelineScrollContainerLeft = gsap.timeline({
             scrollTrigger: {
-                trigger: gridWrapperTrigger.current,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
+                ...scrollTriggerConfig,
             },
         });
 
-        timeline
-            .to(scrollContainerLeft.current, {
-                y: 75,
-                ease: "none",
-            })
+        let timelineScrollContainerRight = gsap.timeline({
+            scrollTrigger: {
+                ...scrollTriggerConfig,
+            },
+        });
 
-            .to(scrollContainerRight.current, {
-                y: -75,
-                ease: "none",
+        breakpoint.add("(min-width: 768px)", () => {
+            timelineScrollContainerLeft.to(scrollContainerLeft.current, {
+                y: -50,
             });
+
+            timelineScrollContainerRight.to(scrollContainerRight.current, {
+                y: 50,
+            });
+        });
+
+        breakpoint.add("(min-width: 1024px)", () => {
+            timelineScrollContainerLeft.to(scrollContainerLeft.current, {
+                y: -100,
+            });
+
+            timelineScrollContainerRight.to(scrollContainerRight.current, {
+                y: 100,
+            });
+        });
     }, []);
 
     return (
-        <section className="container py-22 lg:py-44">
-            <h2 className="mb-4">Albums</h2>
-            <div className="divider w-full h-[1px] bg-slate-200 mb-20" />
+        <section ref={featuredAlbumsGrid} className="container py-22 lg:py-44">
+            {parentIsInView && <FeaturedAlbumsGridCursor />}
 
-            <div className="max-w-[2300px] mx-auto">
-                <Cursor
-                    name="featuredAlbumCardHoverCursor"
-                    width={100}
-                    height={100}
-                    zIndex={100}
-                    easingDuration={2}
-                >
-                    <AnimatePresence>
-                        {cursorType === "featuredAlbumCardHover" && (
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{
-                                    scale: 1,
-                                    transition: {
-                                        duration: 0.3,
-                                    },
-                                }}
-                                exit={{
-                                    scale: 0,
-                                    transition: {
-                                        duration: 0.3,
-                                    },
-                                }}
-                                className="w-full h-full bg-white/[.15] backdrop-blur-2xl text-white overflow-hidden rounded-full"
-                            />
-                        )}
-                    </AnimatePresence>
-                </Cursor>
-
-                <Cursor
-                    name="featuredAlbumCardHoverCursor"
-                    width={100}
-                    height={100}
-                    zIndex={100}
-                    easingDuration={1.8}
-                >
-                    <AnimatePresence>
-                        {cursorType === "featuredAlbumCardHover" && (
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{
-                                    scale: 1,
-                                    transition: {
-                                        duration: 0.3,
-                                    },
-                                }}
-                                exit={{
-                                    scale: 0,
-                                    transition: {
-                                        duration: 0.3,
-                                    },
-                                }}
-                                className="w-full h-full flex items-center justify-center text-white"
-                            >
-                                view
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </Cursor>
-
+            <div
+                id="gridWrapperTrigger"
+                ref={gridWrapperTrigger}
+                className="test grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 pb-10 md:pb-44"
+            >
                 <div
-                    ref={gridWrapperTrigger}
-                    className="grid grid-cols-2 gap-20"
+                    ref={scrollContainerLeft}
+                    className="scroll-container-left w-full flex flex-col gap-12 md:gap-14 lg:gap-20"
                 >
-                    <div
-                        ref={scrollContainerLeft}
-                        className="scroll-container-left w-full flex flex-col gap-20"
-                    >
-                        {oddIndexedAlbums?.map((album: any, index: number) => {
-                            return (
-                                <FeaturedAlbumCard
-                                    key={index}
-                                    slug={album?.albumFileNameForSlug}
-                                    contents={album?.albumContents}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div
-                        ref={scrollContainerRight}
-                        className="scroll-container-right w-full flex flex-col gap-20"
-                    >
-                        {evenIndexedAlbums?.map((album: any, index: number) => {
-                            return (
-                                <FeaturedAlbumCard
-                                    key={index}
-                                    slug={album?.albumFileNameForSlug}
-                                    contents={album?.albumContents}
-                                />
-                            );
-                        })}
-                    </div>
+                    {evenIndexedAlbums?.map((album: any, index: number) => {
+                        return (
+                            <FeaturedAlbumCard
+                                key={index}
+                                slug={album?.albumFileNameForSlug}
+                                contents={album?.albumContents}
+                            />
+                        );
+                    })}
+                </div>
+                <div
+                    ref={scrollContainerRight}
+                    className="scroll-container-right w-full flex flex-col gap-12 md:gap-14 lg:gap-20"
+                >
+                    {oddIndexedAlbums?.map((album: any, index: number) => {
+                        return (
+                            <FeaturedAlbumCard
+                                key={index}
+                                slug={album?.albumFileNameForSlug}
+                                contents={album?.albumContents}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </section>

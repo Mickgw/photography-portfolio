@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const PageTransition = ({ children, router }: any) => {
+const PageTransition = ({ children }: any) => {
     const enterAnimation = {
         initial: {
             top: 0,
@@ -8,7 +8,7 @@ const PageTransition = ({ children, router }: any) => {
         enter: {
             top: "-100vh",
             transition: {
-                duration: 0.65,
+                duration: 0.75,
                 delay: 0.7,
                 ease: [0.76, 0, 0.24, 1],
             },
@@ -20,7 +20,7 @@ const PageTransition = ({ children, router }: any) => {
         exit: {
             top: 0,
             transition: {
-                duration: 0.65,
+                duration: 0.75,
                 ease: [0.76, 0, 0.24, 1],
             },
         },

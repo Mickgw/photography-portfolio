@@ -27,11 +27,11 @@ export const AlbumsImages = ({
         createSeparateArrays(albumPhotos);
 
     return (
-        <div ref={parallaxTrigger} className="grid grid-cols-3 gap-x-10 py-32">
+        <div ref={parallaxTrigger} className="grid grid-cols-3 gap-x-6 py-32">
             <ParallaxElement
                 trigger={parallaxTrigger}
                 yAmount={-500}
-                start="top center"
+                start="top top"
             >
                 <AlbumImagesColumn
                     images={imagesColumnLeft}
@@ -43,7 +43,7 @@ export const AlbumsImages = ({
             <ParallaxElement
                 trigger={parallaxTrigger}
                 yAmount={0}
-                start="top center"
+                start="top top"
             >
                 <AlbumImagesColumn
                     images={imagesColumnMiddle}
@@ -55,7 +55,7 @@ export const AlbumsImages = ({
             <ParallaxElement
                 trigger={parallaxTrigger}
                 yAmount={500}
-                start="top center"
+                start="top top"
             >
                 <AlbumImagesColumn
                     images={imagesColumnRight}

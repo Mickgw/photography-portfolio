@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { setClassname, setEasingDuration } from "./lib/helpers";
 import { CursorProps } from "./lib/props";
 import { Expo } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Cursor: React.FC<CursorProps> = ({
     name,
@@ -16,7 +17,9 @@ const Cursor: React.FC<CursorProps> = ({
 }: CursorProps) => {
     const cursorRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    useGSAP(() => {
+        if (window.innerWidth < 1024) return;
+
         const cursor = cursorRef.current;
 
         const pos = { x: 0, y: 0 };

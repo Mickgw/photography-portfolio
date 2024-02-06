@@ -12,12 +12,12 @@ export const AlbumImagesColumn = ({
     className,
 }: AlbumImagesColumnProps) => {
     return (
-        <div className={`${className ? className : ""} flex flex-col gap-12`}>
+        <div className={`${className ? className : ""} flex flex-col gap-8`}>
             {images?.map((image: any, index: number) => {
                 return (
                     <div
                         key={index}
-                        className="relative rounded-lg overflow-hidden"
+                        className="relative rounded-md overflow-hidden"
                     >
                         <Image
                             src={`/images/${albumFolder}/${image}`}

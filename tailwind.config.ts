@@ -7,6 +7,17 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+        'xs': '440px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1441px',
+        '3xl': '1650px',
+        '4xl': '1900px',
+        '5xl': '2300px',
+    },
     container: {
         // you can configure the container to be centered
         center: true,
@@ -20,8 +31,9 @@ const config: Config = {
         },
       },
     extend: {
+
         fontSize: {
-            '10xl': "clamp(4.6875rem, 2.859rem + 5.8511vw, 8.125rem)",
+            '10xl': "clamp(4.6875rem, 2.859rem + 5.8511vw, 12.125rem)",
             '9xl': "clamp(2.8125rem, 1.4827rem + 4.2553vw, 5.3125rem)",
             // '8xl': "clamp(2.1875rem, 1.0858rem + 5.5085vw, 6.25rem)",
             '7xl': "clamp(2.8125rem, 1.4827rem + 4.2553vw, 5.3125rem)",
@@ -34,6 +46,7 @@ const config: Config = {
 
         colors: {
             'highlight': '#2e2b2b',
+            'lightgray': '#bfbfbf',
         }
     },
   },

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 import { TextMarquee } from "../Marquee/TextMarquee";
+import { useGSAP } from "@gsap/react";
 
 interface HeroProps {
     title?: string;
@@ -15,7 +16,7 @@ const HeroSecondary = ({ title, image, objectPositionHero }: HeroProps) => {
     const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         let timeline = gsap.timeline();
@@ -32,6 +33,7 @@ const HeroSecondary = ({ title, image, objectPositionHero }: HeroProps) => {
             },
         });
     });
+
     return (
         <section
             ref={parallaxTrigger}

@@ -7,6 +7,10 @@ import { promises as fsPromises } from "fs";
 import matter from "gray-matter";
 import { folderNames } from "@/lib/consts";
 import CursorContextProvider from "@/components/Cursor/context/CursorContext";
+import { TextMarquee } from "@/components/Marquee/TextMarquee";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 export default function Home({ featuredAlbums }: any) {
     return (
