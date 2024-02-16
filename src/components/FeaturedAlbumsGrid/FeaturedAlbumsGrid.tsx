@@ -70,40 +70,7 @@ export const FeaturedAlbumsGrid = ({ featuredAlbums }: any) => {
         <section ref={featuredAlbumsGrid} className="container py-22 lg:py-44">
             {parentIsInView && <FeaturedAlbumsGridCursor />}
 
-            <div
-                id="gridWrapperTrigger"
-                ref={gridWrapperTrigger}
-                className="test grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 pb-10 md:pb-44"
-            >
-                <div
-                    ref={scrollContainerLeft}
-                    className="scroll-container-left w-full flex flex-col gap-12 md:gap-14 lg:gap-20"
-                >
-                    {evenIndexedAlbums?.map((album: any, index: number) => {
-                        return (
-                            <FeaturedAlbumCard
-                                key={index}
-                                slug={album?.albumFileNameForSlug}
-                                contents={album?.albumContents}
-                            />
-                        );
-                    })}
-                </div>
-                <div
-                    ref={scrollContainerRight}
-                    className="scroll-container-right w-full flex flex-col gap-12 md:gap-14 lg:gap-20"
-                >
-                    {oddIndexedAlbums?.map((album: any, index: number) => {
-                        return (
-                            <FeaturedAlbumCard
-                                key={index}
-                                slug={album?.albumFileNameForSlug}
-                                contents={album?.albumContents}
-                            />
-                        );
-                    })}
-                </div>
-            </div>
+            <div className="grid grid-cols-2"></div>
         </section>
     );
 };

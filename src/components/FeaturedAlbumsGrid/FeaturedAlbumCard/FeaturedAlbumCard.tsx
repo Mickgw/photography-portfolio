@@ -75,7 +75,7 @@ export const FeaturedAlbumCard = ({
                 >
                     {contents?.featuredAlbumThumbnail && (
                         <div
-                            className="w-full h-full relative overflow-hidden rounded-md lg:rounded-xl mb-2"
+                            className="w-full h-full relative overflow-hidden mb-2"
                             onMouseEnter={() =>
                                 cursorChangeHandler(`featuredAlbumCardHover`)
                             }
@@ -116,7 +116,7 @@ export const FeaturedAlbumCard = ({
                         </div>
                     )}
 
-                    <div className="content-wrapper w-full flex justify-between items-center flex-wrap gap-4">
+                    {/* <div className="content-wrapper w-full flex justify-between items-center flex-wrap gap-4">
                         {contents?.title && (
                             <h3 className="text-[20px] sm:text-[22px] lg:text-[28px] leading-[1]">
                                 {contents?.title}
@@ -128,7 +128,7 @@ export const FeaturedAlbumCard = ({
                                 {contents?.year}
                             </h3>
                         )}
-                    </div>
+                    </div> */}
                 </Link>
             )}
         </div>

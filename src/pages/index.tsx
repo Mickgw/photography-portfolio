@@ -1,39 +1,28 @@
 import PageTransition from "@/components/PageTransition";
-import HeroImage from "../../public/images/hero_main_img_hRes.webp";
+import HeroImage from "../../public/images/hero_img.jpg";
 import { FooterHome } from "@/components/Footer/FooterHome";
-import HeroMain from "@/components/HeroMain/HeroMain";
 import { FeaturedAlbumsGrid } from "@/components/FeaturedAlbumsGrid/FeaturedAlbumsGrid";
 import { promises as fsPromises } from "fs";
 import matter from "gray-matter";
 import { folderNames } from "@/lib/consts";
 import CursorContextProvider from "@/components/Cursor/context/CursorContext";
-import { TextMarquee } from "@/components/Marquee/TextMarquee";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import Hero from "@/components/Hero/Hero";
+import { Intro } from "@/components/Intro/Intro";
 
 export default function Home({ featuredAlbums }: any) {
     return (
         <PageTransition>
             <CursorContextProvider>
-                <HeroMain image={HeroImage} />
+                <Hero
+                    image={HeroImage}
+                    smallTitle="A portfolio website by"
+                    title="Mick Waanders"
+                />
 
-                <div className="container flex gap-32 pt-12 pb-32">
-                    <div className="w-2/3">
-                        <p className="text-3xl font-normal leading-[1.4]">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat.
-                        </p>
-                    </div>
-                    <div className="w-1/3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis.
-                    </div>
-                </div>
+                <Intro
+                    welcomeText="Welcome to my portfolio, showcasing my photography journey and visual stories."
+                    mainText="Embarking on my newfound passion, I crafted a portfolio website from scratch. Merging my creativity and coding skills, I curated a digital showcase, reflecting my journey in this hobby. The site, a canvas of progress, mirrors my evolving skills and enthusiasm."
+                />
 
                 <FeaturedAlbumsGrid featuredAlbums={featuredAlbums} />
 

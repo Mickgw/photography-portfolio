@@ -3,27 +3,18 @@ import { promises as fsPromises } from "fs";
 import matter from "gray-matter";
 import { AlbumsImages } from "@/components/AlbumImages/AlbumsImages";
 import PageTransition from "@/components/PageTransition";
-import { IntroText } from "@/components/IntroText/IntroText";
-import HeroSecondary from "@/components/HeroSecondary/HeroSecondary";
+import HeroWithMarquee from "@/components/HeroWithMarquee/HeroWithMarquee";
 import { FooterAlbumSingle } from "@/components/Footer/FooterAlbumSingle";
 import { folderNames } from "@/lib/consts";
-import { useEffect } from "react";
 
 export default function AlbumPage({ albumContents, albumPhotos }: any) {
     return (
         <PageTransition>
             <article className="page-contents">
-                <HeroSecondary
+                <HeroWithMarquee
                     title={albumContents?.title}
                     image={albumContents?.thumbnail}
                     objectPositionHero={albumContents?.objectPositionHero}
-                />
-
-                <IntroText
-                    year={albumContents?.year}
-                    title={albumContents?.introTitle}
-                    subtitle={albumContents?.introSubtitle}
-                    description={albumContents?.description}
                 />
 
                 <section className="container py-32 overflow-hidden">

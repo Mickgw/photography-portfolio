@@ -7,7 +7,9 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 export const LenisScroller = () => {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
-        const lenis = new Lenis();
+        const lenis = new Lenis({
+            lerp: 0.075,
+        });
 
         lenis.on("scroll", (e: any) => {});
 

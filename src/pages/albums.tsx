@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import fs from "fs";
 import matter from "gray-matter";
-import { AlbumPreview } from "@/components/AlbumPreviews/AlbumPreview";
 import PageTransition from "@/components/PageTransition";
 import { folderNames } from "@/lib/consts";
 
@@ -35,13 +34,7 @@ const Albums = ({ albums }: any) => {
         <PageTransition>
             <div className="container grid grid-cols-2">
                 {albums?.map((album: any, index: number) => {
-                    return (
-                        <AlbumPreview
-                            key={index}
-                            slug={album?.slug}
-                            contents={album?.contents}
-                        />
-                    );
+                    return <h1>{album?.slug}</h1>;
                 })}
             </div>
             <div className="w-full min-h-screen"></div>

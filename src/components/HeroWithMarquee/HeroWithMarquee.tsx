@@ -12,7 +12,7 @@ interface HeroProps {
     objectPositionHero?: string;
 }
 
-const HeroSecondary = ({ title, image, objectPositionHero }: HeroProps) => {
+const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
     const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
 
@@ -97,4 +97,4 @@ const HeroSecondary = ({ title, image, objectPositionHero }: HeroProps) => {
     );
 };
 
-export default HeroSecondary;
+export default HeroWithMarquee;

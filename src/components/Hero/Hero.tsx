@@ -3,15 +3,16 @@ import { motion } from "framer-motion";
 import { gsap, Expo } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
-import SpinningCircularTextArrow from "./SpinningCircularTextArrow";
 import { useGSAP } from "@gsap/react";
 import { ArrowDownRight } from "../svgs/ArrowDownRight";
 
 interface HomeHeroProps {
-    image?: any;
+    image: any;
+    smallTitle: string;
+    title: string;
 }
 
-const HeroMain = ({ image }: HomeHeroProps) => {
+const Hero = ({ image, smallTitle, title }: HomeHeroProps) => {
     const parallaxTrigger = useRef<HTMLDivElement>(null);
 
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
@@ -151,39 +152,36 @@ const HeroMain = ({ image }: HomeHeroProps) => {
             <div
                 ref={overlay}
                 className="bg-gradient-to-t from-black/80 to-transparent absolute w-full h-[500px] bottom-0 z-20"
-            ></div>
-
-            {/* Z-30 */}
-            <div
-                ref={spinningMarqueeArrow}
-                className="absolute right-4 md:right-8 lg:right-12 xl:right-16 bottom-12 z-30"
-            >
-                <SpinningCircularTextArrow
-                    className="w-[150px] h-[150px] "
-                    arrowClassName="w-[60px] h-[60px]"
-                />
-            </div>
+            />
 
             {/* Z-30 */}
             <div
                 ref={heroTextRef}
-                className="absolute bottom-12 -mt-28 left-4 md:left-8 lg:left-12 xl:left-16 z-30"
+                className="absolute bottom-12 -mt-28 left-0 z-30"
             >
-                <div
-                    ref={arrowDownRight}
-                    className="absolute z-30 -top-24 left-0"
-                >
-                    <ArrowDownRight className=" w-[50px] h-[50px] text-white" />
+                <div className="container">
+                    <div
+                        ref={arrowDownRight}
+                        className="absolute z-30 -top-24 left-8"
+                    >
+                        <ArrowDownRight className=" w-[55px] h-[55px] text-white" />
+                    </div>
+
+                    {smallTitle && (
+                        <p className="text-white text-2xl mb-4 font-light">
+                            {smallTitle}
+                        </p>
+                    )}
+
+                    {title && (
+                        <h1 className="text-white leading-[.8] overflow-hidden relative text-9xl -ml-2.5">
+                            {title}
+                        </h1>
+                    )}
                 </div>
-                <p className="text-white text-2xl text-expanded mb-4">
-                    some photo's by
-                </p>
-                <h1 className="text-white  leading-[.8] overflow-hidden relative text-expanded 2xl:font-semibold !text-8xl 2xl:!text-10xl -ml-1">
-                    Mick Waanders
-                </h1>
             </div>
         </section>
     );
 };
 
-export default HeroMain;
+export default Hero;

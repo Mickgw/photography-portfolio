@@ -15,7 +15,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
     return (
         <PreLoaderContextProvider>
             <Layout />
-            {/* {!preLoaderCompleted && <PreLoader />} */}
 
             <AnimatePresence
                 mode="wait"

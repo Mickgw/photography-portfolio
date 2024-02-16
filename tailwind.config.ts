@@ -33,8 +33,8 @@ const config: Config = {
     extend: {
 
         fontSize: {
-            '10xl': "clamp(4.6875rem, 2.859rem + 5.8511vw, 12.125rem)",
-            '9xl': "clamp(2.8125rem, 1.4827rem + 4.2553vw, 5.3125rem)",
+            '10xl': "clamp(3.25rem, 0.5631rem + 10.4854vw, 10rem)",
+            '9xl': "clamp(2.8125rem, 0.3495rem + 9.6117vw, 9rem)",
             // '8xl': "clamp(2.1875rem, 1.0858rem + 5.5085vw, 6.25rem)",
             '7xl': "clamp(2.8125rem, 1.4827rem + 4.2553vw, 5.3125rem)",
             // '6xl': "clamp(1.75rem, 1.0381rem + 3.5593vw, 4.375rem)",
@@ -45,6 +45,7 @@ const config: Config = {
         },
 
         colors: {
+            'primary': '#1F1F1F',
             'highlight': '#2e2b2b',
             'lightgray': '#bfbfbf',
         }
