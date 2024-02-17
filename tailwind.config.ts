@@ -13,10 +13,8 @@ const config: Config = {
         'md': '768px',
         'lg': '1024px',
         'xl': '1280px',
-        '2xl': '1441px',
+        '2xl': '1440px',
         '3xl': '1650px',
-        '4xl': '1900px',
-        '5xl': '2300px',
     },
     container: {
         // you can configure the container to be centered
@@ -26,9 +24,9 @@ const config: Config = {
         padding: '1rem',
   
         // default breakpoints but with 40px removed
-        screens: {
-          '5xl': '2300px',
-        },
+        // screens: {
+        //   '5xl': '1750px',
+        // },
       },
     extend: {
 

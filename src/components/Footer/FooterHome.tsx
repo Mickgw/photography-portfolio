@@ -4,7 +4,8 @@ import Link from "next/link";
 
 export const FooterHome = () => {
     return (
-        <footer className="w-full bg-black text-semi-expanded min-h-screen">
+        <div className="w-full bg-black text-semi-expanded min-h-screen flex items-center justify-center">
+            <h1 className="text-10xl text-white font-bold">Footer</h1>
             {/* <Link
                 href="/albums"
                 className="flex items-center justify-center gap-10 py-44"
@@ -31,6 +32,6 @@ export const FooterHome = () => {
                     </div>
                 </div>
             </div> */}
-        </footer>
+        </div>
     );
 };

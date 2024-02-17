@@ -14,7 +14,6 @@ interface HomeHeroProps {
 
 const Hero = ({ image, smallTitle, title }: HomeHeroProps) => {
     const parallaxTrigger = useRef<HTMLDivElement>(null);
-
     const parallaxImage = useRef() as React.RefObject<HTMLImageElement | null>;
     const spinningMarqueeArrow = useRef<HTMLDivElement>(null);
     const overlay = useRef<HTMLDivElement>(null);
@@ -157,12 +156,12 @@ const Hero = ({ image, smallTitle, title }: HomeHeroProps) => {
             {/* Z-30 */}
             <div
                 ref={heroTextRef}
-                className="absolute bottom-12 -mt-28 left-0 z-30"
+                className="absolute bottom-12 -mt-28 left-0 z-30 w-full"
             >
-                <div className="container">
+                <div className="container relative">
                     <div
                         ref={arrowDownRight}
-                        className="absolute z-30 -top-24 left-8"
+                        className="absolute z-30 -top-24 left-12"
                     >
                         <ArrowDownRight className=" w-[55px] h-[55px] text-white" />
                     </div>
@@ -174,7 +173,7 @@ const Hero = ({ image, smallTitle, title }: HomeHeroProps) => {
                     )}
 
                     {title && (
-                        <h1 className="text-white leading-[.8] overflow-hidden relative text-9xl -ml-2.5">
+                        <h1 className="text-white font-bold leading-[.8] overflow-hidden relative text-9xl -ml-2.5">
                             {title}
                         </h1>
                     )}
