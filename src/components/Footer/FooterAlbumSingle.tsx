@@ -5,7 +5,6 @@ export const FooterAlbumSingle = () => {
     return (
         <footer>
             <Link href="/">
-                {" "}
                 <h2>Footer Album Single</h2>
             </Link>
         </footer>

@@ -1,0 +1,19 @@
+.album-photos--grid {
+    @apply grid grid-cols-3 gap-8 auto-rows-[350px];
+
+    .album--photo {
+        @apply w-full relative;
+
+        &.portrait {
+            @apply row-span-2;
+        }
+
+        &.landscape {
+            @apply col-span-1;
+        }
+
+        img {
+            @apply w-full h-full object-cover object-center;
+        }
+    }
+}

@@ -45,7 +45,7 @@ const config: Config = {
         colors: {
             'primary': '#1F1F1F',
             'highlight': '#2e2b2b',
-            'lightgray': '#bfbfbf',
+            'lightgray': '#ECECEC',
         }
     },
   },

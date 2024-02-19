@@ -55,7 +55,7 @@ const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
             >
                 <Image
                     ref={parallaxImage}
-                    src={image}
+                    src={image?.url}
                     alt="hero image"
                     fill
                     priority

@@ -11,8 +11,23 @@ import { Intro } from "@/components/Intro/Intro";
 import { ScrollText } from "@/components/ScrollText/ScrollText";
 import { ContentLayout } from "@/components/ContentLayout";
 import { FixedFooter } from "@/components/FixedFooter";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { useRef } from "react";
 
 export default function Home({ featuredAlbums }: any) {
+    // useGSAP(() => {
+    //     gsap.from(".footer-scroll--content", {
+    //         y: "-10vh",
+    //         ease: "none",
+    //         scrollTrigger: {
+    //             trigger: ".content--layout",
+    //             start: "bottom bottom",
+    //             scrub: true,
+    //         },
+    //     });
+    // });
+
     return (
         <PageTransition>
             <CursorContextProvider>
@@ -34,7 +49,7 @@ export default function Home({ featuredAlbums }: any) {
                 </ContentLayout>
 
                 <FixedFooter>
-                    <FooterHome />
+                    <FooterHome albumsAmount={featuredAlbums.length} />
                 </FixedFooter>
             </CursorContextProvider>
         </PageTransition>

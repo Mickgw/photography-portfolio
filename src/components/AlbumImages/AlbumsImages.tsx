@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { ParallaxElement } from "../ParallaxElement/ParallaxElement";
 import { AlbumImagesColumn } from "./AlbumImagesColumn";
+import Image from "next/image";
 
 interface AlbumsImagesProps {
     albumFolder: string;
@@ -11,58 +12,32 @@ export const AlbumsImages = ({
     albumFolder,
     albumPhotos,
 }: AlbumsImagesProps) => {
-    const parallaxTrigger = useRef() as React.RefObject<HTMLDivElement>;
-
-    const createSeparateArrays = (mainArray: any) => {
-        const chunkSize = Math.ceil(mainArray.length / 3);
-        const chunks = [];
-
-        for (let i = 0; i < mainArray.length; i += chunkSize) {
-            chunks.push(mainArray.slice(i, i + chunkSize));
-        }
-
-        return chunks;
-    };
-    const [imagesColumnLeft, imagesColumnMiddle, imagesColumnRight] =
-        createSeparateArrays(albumPhotos);
-
     return (
-        <div ref={parallaxTrigger} className="grid grid-cols-3 gap-x-6 py-32">
-            <ParallaxElement
-                trigger={parallaxTrigger}
-                yAmount={-500}
-                start="top top"
-            >
-                <AlbumImagesColumn
-                    images={imagesColumnLeft}
-                    albumFolder={albumFolder}
-                    className="column-left"
-                />
-            </ParallaxElement>
+        <div className="album-photos--grid">
+            {albumPhotos?.map((image: any, index: number) => {
+                // Check if the image ends with "-P.jpg" or "-L.jpg"
+                const isPortrait = image.endsWith("-P.jpg");
+                const isLandscape = image.endsWith("-L.jpg");
 
-            <ParallaxElement
-                trigger={parallaxTrigger}
-                yAmount={0}
-                start="top top"
-            >
-                <AlbumImagesColumn
-                    images={imagesColumnMiddle}
-                    albumFolder={albumFolder}
-                    className="column-middle"
-                />
-            </ParallaxElement>
+                // Determine the class based on the image name
+                const imageClass = isPortrait
+                    ? "portrait"
+                    : isLandscape
+                    ? "landscape"
+                    : "";
 
-            <ParallaxElement
-                trigger={parallaxTrigger}
-                yAmount={500}
-                start="top top"
-            >
-                <AlbumImagesColumn
-                    images={imagesColumnRight}
-                    albumFolder={albumFolder}
-                    className="column-right"
-                />
-            </ParallaxElement>
+                return (
+                    <div key={index} className={`album--photo ${imageClass}`}>
+                        <Image
+                            src={`/images/${albumFolder}/${image}`}
+                            fill
+                            alt=""
+                            placeholder="blur"
+                            blurDataURL={`/images/${albumFolder}/${image}`}
+                        />
+                    </div>
+                );
+            })}
         </div>
     );
 };

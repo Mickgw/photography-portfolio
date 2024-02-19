@@ -167,13 +167,13 @@ const Hero = ({ image, smallTitle, title }: HomeHeroProps) => {
                     </div>
 
                     {smallTitle && (
-                        <p className="text-white text-2xl mb-4 font-light">
+                        <p className="text-white text-2xl mb-4 font-extralight text-semi-expanded">
                             {smallTitle}
                         </p>
                     )}
 
                     {title && (
-                        <h1 className="text-white font-bold leading-[.8] overflow-hidden relative text-9xl -ml-2.5">
+                        <h1 className="text-white text-semi-expanded font-bold leading-[.8] overflow-hidden relative text-9xl -ml-2.5">
                             {title}
                         </h1>
                     )}

@@ -1,16 +1,13 @@
 ---
-[import data]: <> (Data for import stuff, retrieving data from album, etc.)
 meta_title: 
 album_folder_name: 
 categories:
     - cars
 
-[home page data]: <> (Data for the home page specific)
 featured_album_thumb:
     url: /images/folder_name/image.jpg
     object_position: 50% 50%
 
-[album single page data]: <> (Data for the home page specific)
 hero_img_default:
     url: /images/folder_name/image.jpg
     object_position: 50% 50%

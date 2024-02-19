@@ -6,8 +6,6 @@ export const FeaturedAlbumsGrid = ({ featuredAlbums }: any) => {
     const featuredAlbumsGrid = useRef<HTMLDivElement>(null);
     const parentIsInView = useInView(featuredAlbumsGrid);
 
-    console.log("featuredAlbums = ", featuredAlbums);
-
     return (
         <section ref={featuredAlbumsGrid} className="container py-22 lg:py-44">
             {parentIsInView && <FeaturedAlbumsGridCursor />}
