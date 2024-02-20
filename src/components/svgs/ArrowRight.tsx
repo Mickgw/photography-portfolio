@@ -15,16 +15,13 @@ export const ArrowRight = (props: any) => {
                 strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
-                <g id="Arrow / Arrow_Right_MD">
-                    <path
-                        id="Vector"
-                        d="M5 12H19M19 12L13 6M19 12L13 18"
-                        stroke="currentColor"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    ></path>
-                </g>
+                <path
+                    d="M4 12H20M20 12L14 6M20 12L14 18"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                ></path>
             </g>
         </svg>
     );

@@ -10,9 +10,9 @@ export const ScrollText = ({ text }: ScrollTextProps) => {
     }
 
     return (
-        <section className=" container">
-            <div className="text-scroll-container overflow-x-visible py-44">
-                <h2 className="text-10xl whitespace-nowrap font-bold">
+        <section className="container">
+            <div className="text-scroll-container overflow-x-visible">
+                <h2 className="text-10xl whitespace-nowrap font-bold tracking-[-5px] leading-[1.1]">
                     {text}
                 </h2>
             </div>

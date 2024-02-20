@@ -10,6 +10,8 @@ interface CategoryButtonProps {
 export const CategoryButton = ({ categoryName }: CategoryButtonProps) => {
     const hoverElement = useRef<HTMLDivElement>(null);
     const timeline = useRef<any>(null);
+    const timeoutDuration = 0;
+
     let timeoutId: any = null;
 
     useGSAP(() => {
@@ -21,15 +23,15 @@ export const CategoryButton = ({ categoryName }: CategoryButtonProps) => {
                 {
                     top: "-25%",
                     width: "150%",
-                    duration: 0.45,
-                    ease: "power3.in",
+                    duration: 0.4,
+                    ease: "power1.in",
                 },
                 "enter"
             )
 
             .to(
                 hoverElement.current,
-                { top: "-250%", width: "125%", duration: 0.3 },
+                { top: "-250%", width: "75%", duration: 0.3 },
                 "exit"
             );
     }, []);
@@ -42,7 +44,7 @@ export const CategoryButton = ({ categoryName }: CategoryButtonProps) => {
     const manageMouseLeave = () => {
         timeoutId = setTimeout(() => {
             timeline.current.play();
-        }, 50);
+        }, timeoutDuration);
     };
 
     return (
@@ -61,7 +63,7 @@ export const CategoryButton = ({ categoryName }: CategoryButtonProps) => {
 
             <div
                 ref={hoverElement}
-                className="hover--element z-10 pointer-events-none absolute top-full inset-x-0 w-full h-[250%] left-1/2 -translate-x-1/2 mix-blend-difference bg-white rounded-full"
+                className="hover--element z-10 pointer-events-none absolute top-full inset-x-0 w-1/3 h-[250%] left-1/2 -translate-x-1/2 mix-blend-difference bg-[#e0e0e0] rounded-full"
             />
         </button>
     );

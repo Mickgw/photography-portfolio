@@ -4,10 +4,18 @@ import matter from "gray-matter";
 import { AlbumsImages } from "@/components/AlbumImages/AlbumsImages";
 import PageTransition from "@/components/PageTransition";
 import HeroWithMarquee from "@/components/HeroWithMarquee/HeroWithMarquee";
-import { FooterAlbumSingle } from "@/components/Footer/FooterAlbumSingle";
 import { folderNames } from "@/lib/consts";
 import { ContentLayout } from "@/components/ContentLayout";
 import { FixedFooter } from "@/components/FixedFooter";
+import { ScrollTitleWithYear } from "@/components/ScrollTitleWithYear/ScrollTitleWithYear";
+import { TitleWithParagraph } from "@/components/TitleWithParagraph/TitleWithParagraph";
+import type { Metadata } from "next";
+import { ScrollText } from "@/components/ScrollText/ScrollText";
+
+export const metadata: Metadata = {
+    title: "TEST",
+    description: "...",
+};
 
 export default function AlbumPage({ albumContents, albumPhotos }: any) {
     console.log("albumContents = ", albumContents);
@@ -23,7 +31,17 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                         objectPositionHero={albumContents?.objectPosition}
                     />
 
-                    <section className="container py-32 overflow-hidden">
+                    <TitleWithParagraph
+                        title="About"
+                        paragraph={albumContents?.description}
+                    />
+
+                    <ScrollTitleWithYear
+                        title="Some of the pictures I took"
+                        year={albumContents?.year}
+                    />
+
+                    <section className="container py-14 overflow-hidden">
                         <AlbumsImages
                             albumFolder={albumContents?.albumFolderName}
                             albumPhotos={albumPhotos}
@@ -65,6 +83,13 @@ export async function getStaticProps({ params: { slug } }: any) {
 
     const photoAlbumFolderName = `public/images/${albumContents.albumFolderName}`;
 
+    const metadata: Metadata = {
+        title: albumContents?.metaTitle || "Mick Waanders",
+        description:
+            albumContents?.metaDescription ||
+            "Portfolio site from Mick Waanders",
+    };
+
     try {
         const files = await fsPromises.readdir(photoAlbumFolderName);
         const albumPhotos = files.filter((file) => file.endsWith(".jpg"));
@@ -73,6 +98,7 @@ export async function getStaticProps({ params: { slug } }: any) {
             props: {
                 albumContents,
                 albumPhotos,
+                metadata,
             },
         };
     } catch (error) {
@@ -82,6 +108,7 @@ export async function getStaticProps({ params: { slug } }: any) {
             props: {
                 albumContents,
                 albumPhotos: [],
+                metadata,
             },
         };
     }

@@ -1,5 +1,6 @@
 ---
 metaTitle: Nurburgring Classic
+metaDescription: A trip to Nurburgring Classic 2023
 albumFolderName: nurburgring_classic_2023
 categories:
     - cars
