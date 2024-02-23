@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    @apply bg-white overflow-hidden overflow-x-hidden overflow-y-hidden;
+    @apply bg-white lg:overflow-hidden lg:overflow-x-hidden lg:overflow-y-hidden;
 }
 
 .text-expanded {

@@ -26,7 +26,7 @@ export const ParallaxElement = ({
 
         let timeline = gsap.timeline({
             scrollTrigger: {
-                trigger: trigger.current,
+                trigger: trigger,
                 start: start ? start : "top+=100 bottom",
                 end: end ? end : "bottom bottom",
                 scrub: true,

@@ -33,6 +33,11 @@ export const AlbumsImages = ({
                             fill
                             alt=""
                             placeholder="blur"
+                            sizes="
+                                (min-width: 1500px) 33vw,
+                                (min-width: 1024px) 30vw,
+                                45vw,
+                            "
                             blurDataURL={`/images/${albumFolder}/${image}`}
                         />
                     </div>

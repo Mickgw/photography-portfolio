@@ -15,8 +15,6 @@ export const PortretAlbumPreview = ({
 
     const content = album?.contents;
 
-    console.log("album = ", album);
-
     return (
         <Link href={`albums/${album?.slug}`}>
             <div className="w-full aspect-[9/14] relative">
@@ -24,7 +22,7 @@ export const PortretAlbumPreview = ({
                     src={content?.featuredAlbumThumb?.url}
                     alt={content?.mainTitle}
                     fill
-                    priority
+                    sizes="(min-width: 640px) 50vw, 100vw"
                     className="object-cover"
                     style={{
                         objectPosition: content?.featuredAlbumThumb

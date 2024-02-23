@@ -5,27 +5,33 @@ interface AlbumsViewContainerProps {
 }
 
 export const AlbumsViewContainer = ({ children }: AlbumsViewContainerProps) => {
-    // const animation = () => {
-
-    // }
+    const animations = {
+        initial: {
+            opacity: 0,
+            y: 40,
+        },
+        animate: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.55,
+                ease: [0.33, 1, 0.68, 1],
+            },
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.3,
+            },
+        },
+    };
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                    duration: 0.55,
-                    ease: [0.65, 0, 0.35, 1],
-                },
-            }}
-            exit={{
-                opacity: 0,
-                transition: {
-                    duration: 0.3,
-                },
-            }}
+            variants={animations}
+            initial="initial"
+            animate="animate"
+            exit="exit"
         >
             {children}
         </motion.div>

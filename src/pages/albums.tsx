@@ -50,8 +50,8 @@ const Albums = ({ albums }: any) => {
                     >
                         <div className="z-10 absolute left-0 top-1/2 -translate-y-1/2">
                             <ParallaxElement
-                                trigger={parallaxTrigger}
-                                yAmount={-15}
+                                trigger=".heading--container"
+                                yAmount={-25}
                                 start={parallaxTriggerStart}
                                 end={parallaxTriggerEnd}
                             >
@@ -65,7 +65,7 @@ const Albums = ({ albums }: any) => {
                         </div>
 
                         <ParallaxElement
-                            trigger={parallaxTrigger}
+                            trigger=".heading--container"
                             yAmount={25}
                             start={parallaxTriggerStart}
                             end={parallaxTriggerEnd}
