@@ -13,3 +13,8 @@ export const albumCategories = [
     "nature",
     "people",
 ]
+
+export const buttonClickAnimationProps = {
+    scaleWhileTap: 0.94,
+    scaleDuration: 0.15,
+}

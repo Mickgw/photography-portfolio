@@ -7,12 +7,12 @@ interface TextSpacerProps {
 
 export const TextSpacer = ({ color, gap }: TextSpacerProps) => {
     return (
-        <div
-            className="w-[45px] md:w-[75px] lg:w-[100px] h-2 lg:h-4"
+        <span
             style={{
-                backgroundColor: color ? color : "#000",
-                marginInline: `${gap}px`,
+                marginInline: `clamp(1.875rem, 1.4205rem + 1.8182vw, 3.125rem);`,
             }}
-        />
+        >
+            —
+        </span>
     );
 };

@@ -59,7 +59,7 @@ const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
                     alt="hero image"
                     fill
                     priority
-                    className="object-cover object-[50%_10%]"
+                    className="object-cover"
                     style={{
                         objectPosition: objectPositionHero
                             ? objectPositionHero
@@ -89,7 +89,7 @@ const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
                         gap={50}
                         speed={0.03}
                         initialDirection="right"
-                        className="lg:-mt-10 text-10xl"
+                        className="lg:-mt-10 text-9xl"
                     />
                 </motion.div>
             )}

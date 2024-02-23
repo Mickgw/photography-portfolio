@@ -11,6 +11,9 @@ import { ScrollTitleWithYear } from "@/components/ScrollTitleWithYear/ScrollTitl
 import { TitleWithParagraph } from "@/components/TitleWithParagraph/TitleWithParagraph";
 import type { Metadata } from "next";
 import { ScrollText } from "@/components/ScrollText/ScrollText";
+import { ArrowRight } from "@/components/svgs/ArrowRight";
+import { ScrollOpacityText } from "@/components/ScrollOpacityText/ScrollOpacityText";
+import { AlbumAbout } from "@/components/AlbumAbout/AlbumAbout";
 
 export const metadata: Metadata = {
     title: "TEST",
@@ -18,9 +21,6 @@ export const metadata: Metadata = {
 };
 
 export default function AlbumPage({ albumContents, albumPhotos }: any) {
-    console.log("albumContents = ", albumContents);
-    console.log("albumPhotos = ", albumPhotos);
-
     return (
         <PageTransition>
             <ContentLayout>
@@ -31,17 +31,22 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                         objectPositionHero={albumContents?.objectPosition}
                     />
 
-                    <TitleWithParagraph
-                        title="About"
-                        paragraph={albumContents?.description}
+                    <AlbumAbout
+                        textLeft={albumContents?.shortDescription}
+                        textRight={albumContents?.description}
                     />
 
-                    <ScrollTitleWithYear
-                        title="Some of the pictures I took"
-                        year={albumContents?.year}
-                    />
+                    {/* <div className="text-[250px] font-bold text-right text-lightgray">
+                        2023
+                    </div>
 
-                    <section className="container py-14 overflow-hidden">
+                    <div className="text-[250px] font-bold text-left text-lightgray">
+                        About
+                    </div> */}
+
+                    <ScrollTitleWithYear title="" year={albumContents?.year} />
+
+                    <section className="container overflow-hidden">
                         <AlbumsImages
                             albumFolder={albumContents?.albumFolderName}
                             albumPhotos={albumPhotos}

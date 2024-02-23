@@ -13,7 +13,7 @@ export const Word = ({ children, range, progress }: WordProps) => {
     const step = amount / children.length;
 
     return (
-        <span className="word_ ">
+        <span className="word_">
             {characters?.map((character: string, index: number) => {
                 const start = range[0] + step * index;
                 const end = range[0] + step * (index + 1);

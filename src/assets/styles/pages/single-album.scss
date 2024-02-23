@@ -1,5 +1,5 @@
 .album-photos--grid {
-    @apply grid grid-cols-3 gap-6 auto-rows-[300px];
+    @apply grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 auto-rows-[125px] xs:auto-rows-[200px] sm:auto-rows-[250px] lg:auto-rows-[300px];
 
     .album--photo {
         @apply w-full relative;

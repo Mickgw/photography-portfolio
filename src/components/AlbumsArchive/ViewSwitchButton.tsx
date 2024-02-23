@@ -1,22 +1,24 @@
 import { useGSAP } from "@gsap/react";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { buttonClickAnimationProps } from "@/lib/consts";
 
-interface CategoryButtonProps {
-    categoryName: string;
+interface ViewSwitchButtonProps {
+    viewName: string;
     isActive: boolean;
     handleClick: any;
+    children: React.ReactNode;
 }
 
-export const CategoryButton = ({
-    categoryName,
+export const ViewSwitchButton = ({
+    viewName,
     isActive,
     handleClick,
-}: CategoryButtonProps) => {
+    children,
+}: ViewSwitchButtonProps) => {
     const button = useRef<HTMLButtonElement>(null);
     const hoverElement = useRef<HTMLDivElement>(null);
-
+    const childrenElement = useRef<HTMLDivElement>(null);
     const timeline = useRef<any>(null);
     const timeoutDuration = 0;
     let timeoutId: any = null;
@@ -40,8 +42,8 @@ export const CategoryButton = ({
             .to(
                 hoverElement.current,
                 {
-                    top: "-200%",
-                    width: "100%",
+                    top: "-250%",
+                    width: "66%",
                     duration: 0.4,
                 },
                 "exit"
@@ -98,19 +100,22 @@ export const CategoryButton = ({
             onClick={() => {
                 handleButtonClick();
             }}
-            id={categoryName}
+            id={viewName}
             className={
-                "category--button z-0 relative first-letter:uppercase min-h-[60px] px-12 overflow-hidden rounded-full bg-white border-lightgray border-[1px] " +
+                "view-switch--button z-0 focus:overflow-hidden relative first-letter:uppercase w-[60px] h-[60px] overflow-hidden !rounded-full bg-white border-lightgray border-[1px] " +
                 (isActive ? "pointer-events-none" : "")
             }
         >
-            <span className="category--name z-10 translate-y-[1px] text-center">
-                {categoryName}
-            </span>
+            <div
+                ref={childrenElement}
+                className="view--icon absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-10 overflow-hidden"
+            >
+                {children}
+            </div>
 
             <div
                 ref={hoverElement}
-                className="hover--element bg-[#e0e0e0] z-20 pointer-events-none absolute top-full inset-x-0 w-2/3 h-[200%] left-1/2 -translate-x-1/2 mix-blend-difference rounded-full"
+                className="hover--element bg-[#e0e0e0] overflow-hidden z-20 pointer-events-none absolute top-full inset-x-0 w-2/3 h-[250%] left-1/2 -translate-x-1/2 mix-blend-difference rounded-full"
             />
         </button>
     );

@@ -19,8 +19,8 @@ export const TextWithSpacer = ({
                 className="font-semibold"
             >
                 {text}
+                <TextSpacer color={textColor ? textColor : "#000"} gap={gap} />
             </h1>
-            <TextSpacer color={textColor ? textColor : "#000"} gap={gap} />
         </>
     );
 };
