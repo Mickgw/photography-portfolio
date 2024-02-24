@@ -1,5 +1,5 @@
 import fs from "fs";
-import { promises as fsPromises } from "fs";
+import { promisify } from "util";
 import matter from "gray-matter";
 import { AlbumsImages } from "@/components/AlbumImages/AlbumsImages";
 import PageTransition from "@/components/PageTransition";
@@ -7,13 +7,10 @@ import HeroWithMarquee from "@/components/HeroWithMarquee/HeroWithMarquee";
 import { folderNames } from "@/lib/consts";
 import { ContentLayout } from "@/components/ContentLayout";
 import { FixedFooter } from "@/components/FixedFooter";
-import { ScrollTitleWithYear } from "@/components/ScrollTitleWithYear/ScrollTitleWithYear";
-import { TitleWithParagraph } from "@/components/TitleWithParagraph/TitleWithParagraph";
 import type { Metadata } from "next";
-import { ScrollText } from "@/components/ScrollText/ScrollText";
-import { ArrowRight } from "@/components/svgs/ArrowRight";
-import { ScrollOpacityText } from "@/components/ScrollOpacityText/ScrollOpacityText";
 import { AlbumAbout } from "@/components/AlbumAbout/AlbumAbout";
+
+const readdir = promisify(fs.readdir);
 
 export const metadata: Metadata = {
     title: "TEST",
@@ -36,12 +33,14 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                         textRight={albumContents?.description}
                     />
 
-                    <section className="container overflow-hidden pb-32">
-                        <AlbumsImages
-                            albumFolder={albumContents?.albumFolderName}
-                            albumPhotos={albumPhotos}
-                        />
-                    </section>
+                    {albumPhotos && (
+                        <section className="container overflow-hidden pb-32">
+                            <AlbumsImages
+                                albumFolder={albumContents?.albumFolderName}
+                                albumPhotos={albumPhotos}
+                            />
+                        </section>
+                    )}
                 </article>
             </ContentLayout>
 
@@ -86,7 +85,7 @@ export async function getStaticProps({ params: { slug } }: any) {
     };
 
     try {
-        const files = await fsPromises.readdir(photoAlbumFolderName);
+        const files = await readdir(photoAlbumFolderName);
         const albumPhotos = files.filter((file) => file.endsWith(".jpg"));
 
         return {
