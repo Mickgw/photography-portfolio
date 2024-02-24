@@ -100,7 +100,7 @@ export const CategoryButton = ({
             }}
             id={categoryName}
             className={
-                "category--button z-0 relative first-letter:uppercase min-h-[60px] px-12 overflow-hidden rounded-full bg-white border-lightgray border-[1px] " +
+                "category--button z-0 relative first-letter:uppercase min-h-[60px] px-12 overflow-hidden rounded-full bg-white border-bordercolor border-[1px] " +
                 (isActive ? "pointer-events-none" : "")
             }
         >

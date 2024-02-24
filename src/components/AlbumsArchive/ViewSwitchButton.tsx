@@ -102,7 +102,7 @@ export const ViewSwitchButton = ({
             }}
             id={viewName}
             className={
-                "view-switch--button z-0 focus:overflow-hidden relative first-letter:uppercase w-[60px] h-[60px] overflow-hidden !rounded-full bg-white border-lightgray border-[1px] " +
+                "view-switch--button z-0 focus:overflow-hidden relative first-letter:uppercase w-[60px] h-[60px] overflow-hidden !rounded-full bg-white border-bordercolor border-[1px] " +
                 (isActive ? "pointer-events-none" : "")
             }
         >

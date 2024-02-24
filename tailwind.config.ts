@@ -31,14 +31,14 @@ const config: Config = {
     extend: {
 
         fontSize: {
-            '10xl': "clamp(3.25rem, 0.5631rem + 10.4854vw, 10rem)",
+            '10xl': "clamp(3.25rem, 0.5631rem + 10.4854vw, 10rem)", // min: 70px, max: 144px
             '9xl': "clamp(3.75rem, 1.8409rem + 7.6364vw, 9rem)",
-            // '8xl': "clamp(2.1875rem, 1.0858rem + 5.5085vw, 6.25rem)",
+            // '8xl': "",
             '7xl': "clamp(2.8125rem, 1.4827rem + 4.2553vw, 5.3125rem)",
-            // '6xl': "clamp(1.75rem, 1.0381rem + 3.5593vw, 4.375rem)",
-            // '5xl': "clamp(1.5625rem, 1.054rem + 2.5424vw, 3.4375rem)",
-            // '4xl': "clamp(2.1875rem, 0.2344rem + 6.25vw, 3.75rem)",
-            // '3xl': "clamp(1.5rem, 1.1441rem + 1.7797vw, 2.8125rem)",
+            // '6xl': "",
+            '5xl': "clamp(1.375rem, 0.5rem + 2.8vw, 3.125rem)", // min: 22px, max: 50px
+            // '4xl': "",
+            // '3xl': "",
             '2xl': "clamp(1.25rem, 0.9773rem + 1.0909vw, 2rem)",
         },
 
@@ -46,6 +46,7 @@ const config: Config = {
             'primary': '#1F1F1F',
             'highlight': '#2e2b2b',
             'lightgray': '#f2f2f2',
+            'bordercolor': '#e6e6e6',
         }
     },
   },

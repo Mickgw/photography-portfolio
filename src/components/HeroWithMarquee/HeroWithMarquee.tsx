@@ -58,6 +58,8 @@ const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
                     src={image?.url}
                     alt="hero image"
                     fill
+                    quality={100}
+                    sizes="100vw"
                     priority
                     className="object-cover"
                     style={{

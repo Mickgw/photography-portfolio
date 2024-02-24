@@ -1,24 +1,27 @@
 ---
 metaTitle: 
-metaDescription:
+metaDescription: 
 albumFolderName: 
 categories:
     - cars
+    - nature
+    - people
 
 featuredAlbumThumb:
-    url: /images/folder_name/image.jpg
+    url: /images/image_folder/image.jpg
     object_position: 50% 50%
 
 heroImgDefault:
-    url: /images/folder_name/image.jpg
-    objectPosition: 50% 50%
+    url: /images/image_folder/image.jpg
+    object_position: 50% 50%
 
 heroImgWidescreen:
-    url: /images/folder_name/image.jpg
+    url: /images/image_folder/image.jpg
     objectPosition: 50% 50%
 
-heroTitle:
+heroTitle: 
 mainTitle: 
-year: 2023
+year: 
+shortDescription:
 description:
 ---

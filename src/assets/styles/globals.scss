@@ -73,7 +73,7 @@ h6 {
 }
 
 .custom-cursor {
-    @apply hidden lg:block fixed top-0 left-0 pointer-events-none;
+    @apply fixed top-0 left-0 pointer-events-none;
 }
 
 .featured-album-card {

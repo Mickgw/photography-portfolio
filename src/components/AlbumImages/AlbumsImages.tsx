@@ -12,26 +12,34 @@ export const AlbumsImages = ({
     albumFolder,
     albumPhotos,
 }: AlbumsImagesProps) => {
+    const getImageDimensions = (image: any) => {
+        // Check if the image ends with "-P.jpg" or "-L.jpg"
+        const isPortrait = image.endsWith("-P.jpg");
+        const isLandscape = image.endsWith("-L.jpg");
+
+        // Determine the class based on the image name
+        const imageClass = isPortrait
+            ? "portrait"
+            : isLandscape
+            ? "landscape"
+            : "";
+
+        return imageClass;
+    };
+
     return (
         <div className="album-photos--grid">
             {albumPhotos?.map((image: any, index: number) => {
-                // Check if the image ends with "-P.jpg" or "-L.jpg"
-                const isPortrait = image.endsWith("-P.jpg");
-                const isLandscape = image.endsWith("-L.jpg");
-
-                // Determine the class based on the image name
-                const imageClass = isPortrait
-                    ? "portrait"
-                    : isLandscape
-                    ? "landscape"
-                    : "";
-
                 return (
-                    <div key={index} className={`album--photo ${imageClass}`}>
+                    <div
+                        key={index}
+                        className={`album--photo ${getImageDimensions(image)}`}
+                    >
                         <Image
                             src={`/images/${albumFolder}/${image}`}
                             fill
                             alt=""
+                            quality={100}
                             placeholder="blur"
                             sizes="
                                 (min-width: 1500px) 33vw,

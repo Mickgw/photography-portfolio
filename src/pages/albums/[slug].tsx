@@ -36,17 +36,7 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                         textRight={albumContents?.description}
                     />
 
-                    {/* <div className="text-[250px] font-bold text-right text-lightgray">
-                        2023
-                    </div>
-
-                    <div className="text-[250px] font-bold text-left text-lightgray">
-                        About
-                    </div> */}
-
-                    <ScrollTitleWithYear title="" year={albumContents?.year} />
-
-                    <section className="container overflow-hidden">
+                    <section className="container overflow-hidden pb-32">
                         <AlbumsImages
                             albumFolder={albumContents?.albumFolderName}
                             albumPhotos={albumPhotos}
