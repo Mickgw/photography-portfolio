@@ -6,12 +6,14 @@ interface ListAlbumPreviewProps {
     album: any;
     index: number;
     setActiveHoverItem: React.Dispatch<React.SetStateAction<string>>;
+    setActiveHoverItemIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const ListAlbumPreview = ({
     album,
     index,
     setActiveHoverItem,
+    setActiveHoverItemIndex,
 }: ListAlbumPreviewProps) => {
     if (!album) return null;
 
@@ -20,7 +22,10 @@ export const ListAlbumPreview = ({
     return (
         <Link
             href={`albums/${album?.slug}`}
-            onMouseEnter={() => setActiveHoverItem(`list-item-${index}`)}
+            onMouseEnter={() => {
+                setActiveHoverItemIndex(index);
+                setActiveHoverItem(`list-item-${index}`);
+            }}
             onMouseLeave={() => setActiveHoverItem("")}
             className="grid grid-cols-5 border-b border-bordercolor py-8 group"
         >

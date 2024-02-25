@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { ListAlbumPreview } from "./ListAlbumPreview";
 import Cursor from "../Cursor/Cursor";
 import { useInView } from "framer-motion";
+import Image from "next/image";
 
 interface ListViewProps {
     albums: any;
@@ -15,6 +16,8 @@ export const ListView = ({ albums }: ListViewProps) => {
 
     const listViewContainer = useRef<HTMLDivElement>(null);
     const [activeHoverItem, setActiveHoverItem] = useState("");
+    const [activeHoverItemIndex, setActiveHoverItemIndex] = useState(1);
+    const [showCursor, setShowCursor] = useState(false);
 
     console.log("activeHoverItem = ", activeHoverItem);
 
@@ -25,11 +28,28 @@ export const ListView = ({ albums }: ListViewProps) => {
             {parentInView && (
                 <Cursor
                     name="list-view"
-                    width={100}
-                    height={100}
-                    className="hidden lg:flex w-full h-full z-30 bg-black text-white text-center rounded-full items-center justify-center"
+                    width={325}
+                    height={425}
+                    className="hidden lg:block w-full h-full z-30 relative bg-black text-white text-center shadow-2xl"
+                    style={{ opacity: showCursor ? 1 : 0 }}
                 >
-                    <span>view</span>
+                    {albums?.map((album: any, index: number) => {
+                        if (index === activeHoverItemIndex) {
+                            return (
+                                <Image
+                                    src={
+                                        album?.contents?.featuredAlbumThumb?.url
+                                    }
+                                    alt={album?.contents?.mainTitle}
+                                    sizes="25vw"
+                                    fill
+                                    className="object-cover"
+                                />
+                            );
+                        } else {
+                            return null;
+                        }
+                    })}
                 </Cursor>
             )}
 
@@ -42,7 +62,11 @@ export const ListView = ({ albums }: ListViewProps) => {
                     <label>Year</label>
                 </div>
             </div>
-            <div className="flex flex-col gap-4">
+            <div
+                className="flex flex-col gap-4"
+                onMouseEnter={() => setShowCursor(true)}
+                onMouseLeave={() => setShowCursor(false)}
+            >
                 {albums?.map((album: any, index: number) => {
                     return (
                         <ListAlbumPreview
@@ -50,6 +74,7 @@ export const ListView = ({ albums }: ListViewProps) => {
                             album={album}
                             index={index}
                             setActiveHoverItem={setActiveHoverItem}
+                            setActiveHoverItemIndex={setActiveHoverItemIndex}
                         />
                     );
                 })}

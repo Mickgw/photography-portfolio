@@ -10,14 +10,17 @@ import { FixedFooter } from "@/components/FixedFooter";
 import type { Metadata } from "next";
 import { AlbumAbout } from "@/components/AlbumAbout/AlbumAbout";
 
-const readdir = promisify(fs.readdir);
-
 export const metadata: Metadata = {
     title: "TEST",
     description: "...",
 };
 
 export default function AlbumPage({ albumContents, albumPhotos }: any) {
+    if (!albumContents) {
+        // Handle the case where albumContents is not available (e.g., invalid slug)
+        return <h1 className="text-5xl">Error loading album...</h1>;
+    }
+
     return (
         <PageTransition>
             <ContentLayout>
@@ -72,21 +75,24 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }: any) {
-    const readFile = fs.readFileSync(`${folderNames.albums}${slug}.md`, "utf8");
-    const { data: albumContents } = matter(readFile);
-
-    const photoAlbumFolderName = `public/images/${albumContents.albumFolderName}`;
-
-    const metadata: Metadata = {
-        title: albumContents?.metaTitle || "Mick Waanders",
-        description:
-            albumContents?.metaDescription ||
-            "Portfolio site from Mick Waanders",
-    };
-
     try {
-        const files = await readdir(photoAlbumFolderName);
+        const readFile = fs.readFileSync(
+            `${folderNames.albums}${slug}.md`,
+            "utf8"
+        );
+        const { data: albumContents } = matter(readFile);
+
+        const photoAlbumFolderName = `public/images/${albumContents.albumFolderName}`;
+
+        const files = fs.readdirSync(photoAlbumFolderName);
         const albumPhotos = files.filter((file) => file.endsWith(".jpg"));
+
+        const metadata: Metadata = {
+            title: albumContents?.metaTitle || "Mick Waanders",
+            description:
+                albumContents?.metaDescription ||
+                "Portfolio site from Mick Waanders",
+        };
 
         return {
             props: {
@@ -100,7 +106,7 @@ export async function getStaticProps({ params: { slug } }: any) {
 
         return {
             props: {
-                albumContents,
+                albumContents: null,
                 albumPhotos: [],
                 metadata,
             },

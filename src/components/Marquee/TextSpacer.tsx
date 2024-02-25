@@ -9,7 +9,7 @@ export const TextSpacer = ({ color, gap }: TextSpacerProps) => {
     return (
         <span
             style={{
-                marginInline: `clamp(1.875rem, 1.4205rem + 1.8182vw, 3.125rem);`,
+                marginInline: `clamp(1.875rem, 1.4205rem + 1.8182vw, 3.125rem)`,
             }}
         >
             —

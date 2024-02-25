@@ -33,7 +33,7 @@ const PageTransition = ({ children }: any) => {
                 initial="initial"
                 animate="enter"
                 exit="exit"
-                className="w-screen h-screen overflow-hidden fixed inset-0 bg-black z-[100] pointer-events-none"
+                className="w-screen h-screen overflow-hidden fixed inset-0 bg-black z-[100] cursor-wait"
             />
             {children}
         </div>
