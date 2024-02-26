@@ -22,12 +22,12 @@ export const ListAlbumPreview = ({
     return (
         <Link
             href={`albums/${album?.slug}`}
-            onMouseEnter={() => {
+            onMouseOverCapture={() => {
                 setActiveHoverItemIndex(index);
                 setActiveHoverItem(`list-item-${index}`);
             }}
             onMouseLeave={() => setActiveHoverItem("")}
-            className="grid grid-cols-5 border-b border-bordercolor py-8 group"
+            className="grid grid-cols-5 border-b border-bordercolor py-9 group"
         >
             <div className="col-span-1">
                 <h2 className="text-9xl font-bold text-lightgray tracking-[-5px] leading-[.8] group-hover:brightness-[.85] transition-all duration-500 ease-in-out">

@@ -30,21 +30,27 @@ export const ListView = ({ albums }: ListViewProps) => {
                     name="list-view"
                     width={325}
                     height={425}
-                    className="hidden lg:block w-full h-full z-30 relative bg-black text-white text-center shadow-2xl"
+                    className="hidden lg:block w-full h-full z-30 shadow-2xl"
                     style={{ opacity: showCursor ? 1 : 0 }}
                 >
                     {albums?.map((album: any, index: number) => {
                         if (index === activeHoverItemIndex) {
                             return (
-                                <Image
-                                    src={
-                                        album?.contents?.featuredAlbumThumb?.url
-                                    }
-                                    alt={album?.contents?.mainTitle}
-                                    sizes="25vw"
-                                    fill
-                                    className="object-cover"
-                                />
+                                <div
+                                    className="w-full h-full relative"
+                                    key={index}
+                                >
+                                    <Image
+                                        src={
+                                            album?.contents?.featuredAlbumThumb
+                                                ?.url
+                                        }
+                                        alt={album?.contents?.mainTitle}
+                                        sizes="25vw"
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
                             );
                         } else {
                             return null;
@@ -53,7 +59,7 @@ export const ListView = ({ albums }: ListViewProps) => {
                 </Cursor>
             )}
 
-            <div className="grid grid-cols-5 border-b border-bordercolor pb-4 mb-4">
+            <div className="grid grid-cols-5 border-b border-bordercolor pb-4">
                 <div className="col-span-1"></div>
                 <div className="col-span-3">
                     <label>Album</label>
@@ -63,8 +69,8 @@ export const ListView = ({ albums }: ListViewProps) => {
                 </div>
             </div>
             <div
-                className="flex flex-col gap-4"
-                onMouseEnter={() => setShowCursor(true)}
+                className="flex flex-col"
+                onMouseOverCapture={() => setShowCursor(true)}
                 onMouseLeave={() => setShowCursor(false)}
             >
                 {albums?.map((album: any, index: number) => {
