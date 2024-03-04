@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { ListAlbumPreview } from "./ListAlbumPreview";
-import Cursor from "../Cursor/Cursor";
-import { useInView } from "framer-motion";
+import Cursor from "../../Cursor/Cursor";
+import { AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
+import { ListViewCursor } from "./ListViewCursor";
 
 interface ListViewProps {
     albums: any;
@@ -18,49 +19,30 @@ export const ListView = ({ albums }: ListViewProps) => {
     const [activeHoverItem, setActiveHoverItem] = useState("");
     const [activeHoverItemIndex, setActiveHoverItemIndex] = useState(1);
     const [showCursor, setShowCursor] = useState(false);
-
-    console.log("activeHoverItem = ", activeHoverItem);
-
     const parentInView = useInView(listViewContainer);
 
     return (
-        <div ref={listViewContainer} className="list--view">
+        <div ref={listViewContainer} className="list--view hidden md:block">
             {parentInView && (
                 <Cursor
                     name="list-view"
-                    width={325}
-                    height={425}
-                    className="hidden lg:block w-full h-full z-30 shadow-2xl"
-                    style={{ opacity: showCursor ? 1 : 0 }}
+                    width={300}
+                    height={400}
+                    className="hidden lg:block w-full h-full z-30"
                 >
-                    {albums?.map((album: any, index: number) => {
-                        if (index === activeHoverItemIndex) {
-                            return (
-                                <div
-                                    className="w-full h-full relative"
-                                    key={index}
-                                >
-                                    <Image
-                                        src={
-                                            album?.contents?.featuredAlbumThumb
-                                                ?.url
-                                        }
-                                        alt={album?.contents?.mainTitle}
-                                        sizes="25vw"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            );
-                        } else {
-                            return null;
-                        }
-                    })}
+                    <AnimatePresence>
+                        {showCursor && (
+                            <ListViewCursor
+                                albums={albums}
+                                activeHoverItemIndex={activeHoverItemIndex}
+                            />
+                        )}
+                    </AnimatePresence>
                 </Cursor>
             )}
 
             <div className="grid grid-cols-5 border-b border-bordercolor pb-4">
-                <div className="col-span-1"></div>
+                <div className="col-span-1" />
                 <div className="col-span-3">
                     <label>Album</label>
                 </div>

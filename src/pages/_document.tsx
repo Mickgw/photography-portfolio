@@ -3,12 +3,12 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
     return (
         <Html lang="en">
-            <link
+            {/* <link
                 rel="preload"
                 href="/mona_sans/Mona-Sans.woff2"
                 as="font"
                 type="font/woff2"
-            ></link>
+            ></link> */}
             <Head />
             <body>
                 <Main />

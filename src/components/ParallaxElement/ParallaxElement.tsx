@@ -8,6 +8,7 @@ interface ParallaxElementProps {
     yAmount: number;
     start?: string;
     end?: string;
+    className?: string;
     children: React.ReactNode;
 }
 
@@ -16,6 +17,7 @@ export const ParallaxElement = ({
     yAmount,
     start,
     end,
+    className,
     children,
 }: ParallaxElementProps) => {
     const parallaxContainer = useRef() as React.RefObject<HTMLDivElement>;
@@ -56,8 +58,13 @@ export const ParallaxElement = ({
     }, []);
 
     return (
-        <div ref={parallaxContainer} className="w-full h-full">
-            <div ref={parallaxElement}>{children}</div>
+        <div
+            ref={parallaxContainer}
+            className={`${className ? className : "w-full h-full"}`}
+        >
+            <div ref={parallaxElement} className="w-full h-full">
+                {children}
+            </div>
         </div>
     );
 };

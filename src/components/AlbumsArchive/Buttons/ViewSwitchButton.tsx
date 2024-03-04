@@ -1,21 +1,22 @@
 import { useGSAP } from "@gsap/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { buttonClickAnimationProps } from "@/lib/consts";
+import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
 
 interface ViewSwitchButtonProps {
     viewName: string;
-    isActive: boolean;
-    handleClick: any;
     children: React.ReactNode;
 }
 
 export const ViewSwitchButton = ({
     viewName,
-    isActive,
-    handleClick,
     children,
 }: ViewSwitchButtonProps) => {
+    const { activeView, activeViewChangeHandler } =
+        useContext(AlbumsArchiveContext);
+    const isActive = activeView === viewName;
+
     const button = useRef<HTMLButtonElement>(null);
     const hoverElement = useRef<HTMLDivElement>(null);
     const childrenElement = useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ export const ViewSwitchButton = ({
                 hoverElement.current,
                 {
                     top: "-250%",
-                    width: "66%",
+                    width: "100%",
                     duration: 0.4,
                 },
                 "exit"
@@ -78,7 +79,7 @@ export const ViewSwitchButton = ({
     };
 
     const handleButtonClick = () => {
-        handleClick();
+        activeViewChangeHandler(viewName);
 
         gsap.to(button.current, {
             scale: buttonClickAnimationProps.scaleWhileTap,

@@ -31,8 +31,9 @@ const config: Config = {
     extend: {
 
         fontSize: {
+            // All have min viewport width 500px and max viewport width 1500px
             '10xl': "clamp(3.25rem, 0.5631rem + 10.4854vw, 10rem)", // min: 70px, max: 144px
-            '9xl': "clamp(3.75rem, 1.8409rem + 7.6364vw, 9rem)",
+            '9xl': "clamp(4.0625rem, 2.0313rem + 6.5vw, 8.125rem)", // min: 55px, max: 130px
             // '8xl': "",
             '7xl': "clamp(2.8125rem, 1.4827rem + 4.2553vw, 5.3125rem)",
             // '6xl': "",

@@ -1,19 +1,19 @@
 import { useGSAP } from "@gsap/react";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { buttonClickAnimationProps } from "@/lib/consts";
+import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
 
 interface CategoryButtonProps {
     categoryName: string;
-    isActive: boolean;
-    handleClick: any;
 }
 
-export const CategoryButton = ({
-    categoryName,
-    isActive,
-    handleClick,
-}: CategoryButtonProps) => {
+export const CategoryButton = ({ categoryName }: CategoryButtonProps) => {
+    const { activeCategory, activeCategoryChangeHandler } =
+        useContext(AlbumsArchiveContext);
+
+    const isActive = activeCategory === categoryName;
+
     const button = useRef<HTMLButtonElement>(null);
     const hoverElement = useRef<HTMLDivElement>(null);
 
@@ -76,7 +76,7 @@ export const CategoryButton = ({
     };
 
     const handleButtonClick = () => {
-        handleClick();
+        activeCategoryChangeHandler(categoryName);
 
         gsap.to(button.current, {
             scale: buttonClickAnimationProps.scaleWhileTap,
@@ -100,7 +100,7 @@ export const CategoryButton = ({
             }}
             id={categoryName}
             className={
-                "category--button z-0 relative first-letter:uppercase min-h-[60px] px-12 overflow-hidden rounded-full bg-white border-bordercolor border-[1px] " +
+                "category--button shrink-0 w-fit text-[13px] lg:text-base z-0 relative first-letter:uppercase min-h-[52px] lg:min-h-[60px] px-8 lg:px-12 overflow-hidden rounded-full bg-white border-bordercolor border-[1px] " +
                 (isActive ? "pointer-events-none" : "")
             }
         >

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { AlbumsArchive } from "@/components/AlbumsArchive/AlbumsArchive";
 import { ParallaxElement } from "@/components/ParallaxElement/ParallaxElement";
 import { AlbumsText } from "@/components/svgs/AlbumsText";
+import AlbumsArchiveContextProvider from "@/context/AlbumsArchiveContext";
 
 export async function getStaticProps() {
     const files = fs.readdirSync(folderNames.albums);
@@ -43,7 +44,7 @@ const Albums = ({ albums }: any) => {
     return (
         <PageTransition>
             <ContentLayout className="pt-28">
-                <div className="container mb-10">
+                <div className="container mb-6 sm:mb-10">
                     <div
                         ref={parallaxTrigger}
                         className="heading--container relative"
@@ -55,9 +56,9 @@ const Albums = ({ albums }: any) => {
                                 start={parallaxTriggerStart}
                                 end={parallaxTriggerEnd}
                             >
-                                <h1 className="leading-[1] tracking-[-5px] text-[130px] font-bold">
+                                <h1 className="leading-[1] tracking-tighter md:tracking-[-5px] text-9xl font-bold">
                                     Albums
-                                    <span className="absolute -right-8 -top-0 text-[35px] tracking-tighter">
+                                    <span className="absolute -right-6 sm:-right-7 md:-right-8 top-1 sm:top-3 lg:top-2 xl:top-3 text-[20px] md:text-[24px] lg:text-[28px] tracking-tighter">
                                         0{albums.length}
                                     </span>
                                 </h1>
@@ -66,16 +67,22 @@ const Albums = ({ albums }: any) => {
 
                         <ParallaxElement
                             trigger=".heading--container"
-                            yAmount={25}
+                            yAmount={20}
                             start={parallaxTriggerStart}
                             end={parallaxTriggerEnd}
+                            className="min-w-[500px]"
                         >
                             <AlbumsText className=" text-[#f7f7f7]" />
                         </ParallaxElement>
                     </div>
                 </div>
 
-                <AlbumsArchive albums={albums} categories={albumCategories} />
+                <AlbumsArchiveContextProvider>
+                    <AlbumsArchive
+                        albums={albums}
+                        categories={albumCategories}
+                    />
+                </AlbumsArchiveContextProvider>
 
                 <div className="w-full min-h-screen"></div>
             </ContentLayout>

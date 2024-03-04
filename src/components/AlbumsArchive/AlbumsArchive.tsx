@@ -1,13 +1,12 @@
-import Link from "next/link";
-import React, { useState } from "react";
-import { CategoryButton } from "./CategoryButton";
-import { ViewSwitchButton } from "./ViewSwitchButton";
-import { PortretGridViewIcon } from "../svgs/PortretGridViewIcon";
-import { ListViewIcon } from "../svgs/ListViewIcon";
-import { AnimatePresence, motion } from "framer-motion";
-import { PortretGridView } from "./PortretGridView";
-import { ListView } from "./ListView";
+import { useContext } from "react";
+import { AnimatePresence } from "framer-motion";
+import { PortretGridView } from "./PortretView/PortretGridView";
+import { ListView } from "./ListView/ListView";
 import { AlbumsViewContainer } from "./AlbumsViewContainer";
+import { ButtonsDesktopView } from "./Buttons/ButtonsDesktopView";
+import { ButtonsResponsiveView } from "./Buttons/ButtonsResponsiveView";
+import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
+import { ALBUM_ARCHIVE_VIEWS } from "@/lib/consts";
 
 interface AlbumsArchiveProps {
     albums: any;
@@ -15,58 +14,29 @@ interface AlbumsArchiveProps {
 }
 
 export const AlbumsArchive = ({ albums, categories }: AlbumsArchiveProps) => {
-    const [activeCategory, setActiveCategory] = useState("all");
-    const [activeView, setActiveView] = useState("portret-grid");
-
-    let portretViewActive = activeView === "portret-grid";
-    let listViewActive = activeView === "list";
+    const { activeView } = useContext(AlbumsArchiveContext);
+    const portretGridView = ALBUM_ARCHIVE_VIEWS.portretGrid;
 
     return (
-        <div className="container">
-            <div className="flex justify-between pt-14 pb-24 overflow-hidden">
-                <div className="flex items-center gap-4 flex-wrap">
-                    {categories?.map((category: any, index: number) => {
-                        return (
-                            <CategoryButton
-                                categoryName={category}
-                                isActive={activeCategory === category}
-                                handleClick={() => setActiveCategory(category)}
-                                key={index}
-                            />
-                        );
-                    })}
-                </div>
-
-                <div className="flex flex-wrap gap-4">
-                    <ViewSwitchButton
-                        viewName="portret-grid"
-                        isActive={portretViewActive}
-                        handleClick={() => setActiveView("portret-grid")}
-                    >
-                        <PortretGridViewIcon />
-                    </ViewSwitchButton>
-
-                    <ViewSwitchButton
-                        viewName="list"
-                        isActive={listViewActive}
-                        handleClick={() => setActiveView("list")}
-                    >
-                        <ListViewIcon />
-                    </ViewSwitchButton>
-                </div>
+        <div className="overflow-hidden">
+            <div className="filters-and-grid-view">
+                <ButtonsDesktopView categories={categories} />
+                <ButtonsResponsiveView categories={categories} />
             </div>
 
-            <AnimatePresence mode="wait">
-                {activeView === "portret-grid" ? (
-                    <AlbumsViewContainer key="portret-grid">
-                        <PortretGridView albums={albums} />
-                    </AlbumsViewContainer>
-                ) : (
-                    <AlbumsViewContainer key="list">
-                        <ListView albums={albums} />
-                    </AlbumsViewContainer>
-                )}
-            </AnimatePresence>
+            <div className="container">
+                <AnimatePresence mode="wait">
+                    {activeView === portretGridView ? (
+                        <AlbumsViewContainer key={`portret-grid`}>
+                            <PortretGridView albums={albums} />
+                        </AlbumsViewContainer>
+                    ) : (
+                        <AlbumsViewContainer key={`numbered-list`}>
+                            <ListView albums={albums} />
+                        </AlbumsViewContainer>
+                    )}
+                </AnimatePresence>
+            </div>
         </div>
     );
 };

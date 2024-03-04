@@ -62,6 +62,8 @@ const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
                     sizes="100vw"
                     priority
                     className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={image?.url}
                     style={{
                         objectPosition: objectPositionHero
                             ? objectPositionHero

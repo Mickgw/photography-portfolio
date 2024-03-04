@@ -39,7 +39,8 @@ export const AlbumsImages = ({
                             src={`/images/${albumFolder}/${image}`}
                             fill
                             alt=""
-                            quality={100}
+                            priority
+                            quality={85}
                             placeholder="blur"
                             sizes="
                                 (min-width: 1500px) 33vw,
