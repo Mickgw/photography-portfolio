@@ -1,11 +1,12 @@
-import Link from "next/link";
-import React, { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { PortretAlbumPreview } from "./PortretAlbumPreview";
 import { AnimatePresence, useInView } from "framer-motion";
-import Cursor from "../../Cursor/Cursor";
 import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
 import { ALBUMS_ARCHIVE_ALBUM_ANIMATION } from "@/lib/consts";
 import { motion } from "framer-motion";
+import { VisibleAlbum } from "@/lib/props";
+import { getVisibleAlbums } from "@/lib/helpers";
+import Cursor from "../../Cursor/Cursor";
 
 interface PortretGridViewProps {
     albums: any;
@@ -21,25 +22,15 @@ export const PortretGridView = ({ albums }: PortretGridViewProps) => {
     const parentInView = useInView(portretViewContainer);
     const { activeCategory } = useContext(AlbumsArchiveContext);
 
-    const getAlbums = () => {
-        return albums.map((album: any, index: number) => {
-            const albumCategories = album?.contents?.categories;
+    const visibleAlbums: VisibleAlbum[] = getVisibleAlbums(
+        albums,
+        activeCategory
+    );
 
-            if (
-                albumCategories.includes(activeCategory) ||
-                activeCategory === "all"
-            ) {
-                return (
-                    <PortretAlbumPreview
-                        key={index}
-                        album={album}
-                        index={index}
-                    />
-                );
-            }
-
-            return null;
-        });
+    const getVisiblePortretAlbumPreview = () => {
+        return visibleAlbums.map(({ album, index }) => (
+            <PortretAlbumPreview key={index} album={album} index={index} />
+        ));
     };
 
     return (
@@ -60,16 +51,14 @@ export const PortretGridView = ({ albums }: PortretGridViewProps) => {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={`portret-grid-${activeCategory}`}
-                        initial={ALBUMS_ARCHIVE_ALBUM_ANIMATION.initial}
-                        animate={ALBUMS_ARCHIVE_ALBUM_ANIMATION.animate}
-                        exit={ALBUMS_ARCHIVE_ALBUM_ANIMATION.exit}
+                        {...ALBUMS_ARCHIVE_ALBUM_ANIMATION}
                     >
                         <div
                             onMouseOverCapture={() => setShowCursor(true)}
                             onMouseLeave={() => setShowCursor(false)}
                             className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-5 lg:gap-x-12 gap-y-16 lg:gap-y-20"
                         >
-                            {getAlbums()}
+                            {getVisiblePortretAlbumPreview()}
                         </div>
                     </motion.div>
                 </AnimatePresence>

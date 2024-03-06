@@ -5,36 +5,16 @@ import PageTransition from "@/components/PageTransition";
 import { albumCategories, folderNames } from "@/lib/consts";
 import { ContentLayout } from "@/components/ContentLayout";
 import { FixedFooter } from "@/components/FixedFooter";
-import Link from "next/link";
 import { AlbumsArchive } from "@/components/AlbumsArchive/AlbumsArchive";
 import { ParallaxElement } from "@/components/ParallaxElement/ParallaxElement";
 import { AlbumsText } from "@/components/svgs/AlbumsText";
 import AlbumsArchiveContextProvider from "@/context/AlbumsArchiveContext";
+import { Metadata } from "next";
 
-export async function getStaticProps() {
-    const files = fs.readdirSync(folderNames.albums);
-    const markdownPosts = files.filter((file) => file.endsWith(".md"));
-
-    const albums = markdownPosts.map((fileName) => {
-        const slug = fileName.replace(".md", "");
-        const readFile = fs.readFileSync(
-            `${folderNames.albums}${fileName}`,
-            "utf8"
-        );
-        const { data: contents } = matter(readFile);
-
-        return {
-            slug,
-            contents,
-        };
-    });
-
-    return {
-        props: {
-            albums,
-        },
-    };
-}
+export const metadata: Metadata = {
+    title: "All Albums",
+    description: "An archive of all albums. Filterable by category.",
+};
 
 const Albums = ({ albums }: any) => {
     const parallaxTrigger = useRef<HTMLDivElement>(null);
@@ -99,3 +79,28 @@ const Albums = ({ albums }: any) => {
 };
 
 export default Albums;
+
+export async function getStaticProps() {
+    const files = fs.readdirSync(folderNames.albums);
+    const markdownPosts = files.filter((file) => file.endsWith(".md"));
+
+    const albums = markdownPosts.map((fileName) => {
+        const slug = fileName.replace(".md", "");
+        const readFile = fs.readFileSync(
+            `${folderNames.albums}${fileName}`,
+            "utf8"
+        );
+        const { data: contents } = matter(readFile);
+
+        return {
+            slug,
+            contents,
+        };
+    });
+
+    return {
+        props: {
+            albums,
+        },
+    };
+}

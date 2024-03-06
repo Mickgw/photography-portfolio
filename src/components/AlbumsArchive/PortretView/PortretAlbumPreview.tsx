@@ -5,8 +5,6 @@ import { useContext, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { motion } from "framer-motion";
-import { ALBUMS_ARCHIVE_ALBUM_ANIMATION } from "@/lib/consts";
 import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
 
 interface PortretAlbumPreviewProps {
@@ -67,7 +65,7 @@ export const PortretAlbumPreview = ({
                                     alt={content?.mainTitle}
                                     fill
                                     quality={100}
-                                    sizes="(min-width: 640px) 50vw, 100vw"
+                                    sizes="(max-width: 640px) 90vw, 45vw"
                                     className="object-cover"
                                     style={{
                                         objectPosition: imageObjectPosition,

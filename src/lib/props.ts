@@ -4,3 +4,9 @@ export interface AlbumsArchiveContextValue {
     activeViewChangeHandler: (view: string) => void;
     activeCategoryChangeHandler: (category: string) => void;
 }
+
+export interface VisibleAlbum {
+    album: any;
+    index: number;
+  }
+  

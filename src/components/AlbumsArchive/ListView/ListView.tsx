@@ -1,10 +1,12 @@
-import Link from "next/link";
-import React, { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { ListAlbumPreview } from "./ListAlbumPreview";
 import Cursor from "../../Cursor/Cursor";
-import { AnimatePresence, useInView } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence, useInView, motion } from "framer-motion";
 import { ListViewCursor } from "./ListViewCursor";
+import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
+import { ALBUMS_ARCHIVE_ALBUM_ANIMATION } from "@/lib/consts";
+import { VisibleAlbum, getVisibleAlbums } from "@/lib/helpers";
+import { FilteredAlbumsViewContainer } from "../FilteredAlbumsViewContainer";
 
 interface ListViewProps {
     albums: any;
@@ -20,6 +22,24 @@ export const ListView = ({ albums }: ListViewProps) => {
     const [activeHoverItemIndex, setActiveHoverItemIndex] = useState(1);
     const [showCursor, setShowCursor] = useState(false);
     const parentInView = useInView(listViewContainer);
+    const { activeCategory } = useContext(AlbumsArchiveContext);
+
+    const visibleAlbums: VisibleAlbum[] = getVisibleAlbums(
+        albums,
+        activeCategory
+    );
+
+    const getVisibleListAlbumPreview = () => {
+        return visibleAlbums.map(({ album, index }) => (
+            <ListAlbumPreview
+                key={index}
+                album={album}
+                index={index}
+                setActiveHoverItem={setActiveHoverItem}
+                setActiveHoverItemIndex={setActiveHoverItemIndex}
+            />
+        ));
+    };
 
     return (
         <div ref={listViewContainer} className="list--view hidden md:block">
@@ -50,23 +70,29 @@ export const ListView = ({ albums }: ListViewProps) => {
                     <label>Year</label>
                 </div>
             </div>
-            <div
-                className="flex flex-col"
-                onMouseOverCapture={() => setShowCursor(true)}
-                onMouseLeave={() => setShowCursor(false)}
-            >
-                {albums?.map((album: any, index: number) => {
-                    return (
-                        <ListAlbumPreview
-                            key={index}
-                            album={album}
-                            index={index}
-                            setActiveHoverItem={setActiveHoverItem}
-                            setActiveHoverItemIndex={setActiveHoverItemIndex}
-                        />
-                    );
-                })}
-            </div>
+
+            {albums && (
+                <div
+                    className="flex flex-col"
+                    onMouseOverCapture={() => setShowCursor(true)}
+                    onMouseLeave={() => setShowCursor(false)}
+                >
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={`list-view-${activeCategory}`}
+                            {...ALBUMS_ARCHIVE_ALBUM_ANIMATION}
+                        >
+                            <div
+                                className="flex flex-col"
+                                onMouseOverCapture={() => setShowCursor(true)}
+                                onMouseLeave={() => setShowCursor(false)}
+                            >
+                                {getVisibleListAlbumPreview()}
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            )}
         </div>
     );
 };
