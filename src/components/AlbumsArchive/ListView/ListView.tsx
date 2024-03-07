@@ -6,7 +6,6 @@ import { ListViewCursor } from "./ListViewCursor";
 import { AlbumsArchiveContext } from "@/context/AlbumsArchiveContext";
 import { ALBUMS_ARCHIVE_ALBUM_ANIMATION } from "@/lib/consts";
 import { VisibleAlbum, getVisibleAlbums } from "@/lib/helpers";
-import { FilteredAlbumsViewContainer } from "../FilteredAlbumsViewContainer";
 
 interface ListViewProps {
     albums: any;
