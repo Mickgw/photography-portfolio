@@ -100,7 +100,7 @@ export const CategoryButton = ({ categoryName }: CategoryButtonProps) => {
             }}
             id={categoryName}
             className={
-                "category--button shrink-0 w-fit text-[12px] lg:text-base z-0 isolate relative first-letter:uppercase min-h-[45px] xs:min-h-[52px] lg:min-h-[60px] px-8 lg:px-12 overflow-hidden rounded-full bg-white border-bordercolor border-[1px] " +
+                "category--button shrink-0 w-fit text-[12px] lg:text-base will-change-transform z-0 isolate relative first-letter:uppercase min-h-[45px] xs:min-h-[52px] lg:min-h-[60px] px-8 lg:px-12 overflow-hidden rounded-full bg-white border-bordercolor border-[1px] " +
                 (isActive ? "pointer-events-none" : "")
             }
         >
