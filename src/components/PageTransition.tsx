@@ -8,7 +8,7 @@ const PageTransition = ({ children }: any) => {
         enter: {
             top: "-100vh",
             transition: {
-                duration: 0.75,
+                duration: 0.55,
                 delay: 0.7,
                 ease: [0.76, 0, 0.24, 1],
             },
@@ -20,7 +20,7 @@ const PageTransition = ({ children }: any) => {
         exit: {
             top: 0,
             transition: {
-                duration: 0.75,
+                duration: 0.55,
                 ease: [0.76, 0, 0.24, 1],
             },
         },

@@ -42,11 +42,7 @@ export const AlbumsImages = ({
                             priority
                             quality={85}
                             placeholder="blur"
-                            sizes="
-                                (min-width: 1500px) 33vw,
-                                (min-width: 1024px) 30vw,
-                                45vw,
-                            "
+                            sizes="(min-width: 1660px) 502px, (min-width: 1440px) 432px, (min-width: 1280px) 384px, (min-width: 1040px) 304px, (min-width: 780px) 360px, (min-width: 640px) 296px, (min-width: 560px) 238px, calc(45.83vw - 10px)"
                             blurDataURL={`/images/${albumFolder}/${image}`}
                         />
                     </div>

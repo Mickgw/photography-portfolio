@@ -79,7 +79,6 @@ const HeroWithMarquee = ({ title, image, objectPositionHero }: HeroProps) => {
                     animate={{
                         y: 0,
                         opacity: 1,
-
                         transition: {
                             delay: 0.6,
                             duration: 1.3,

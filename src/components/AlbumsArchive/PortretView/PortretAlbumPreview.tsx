@@ -65,7 +65,7 @@ export const PortretAlbumPreview = ({
                                     alt={content?.mainTitle}
                                     fill
                                     quality={100}
-                                    sizes="(max-width: 640px) 90vw, 45vw"
+                                    sizes="(min-width: 1660px) 753px, (min-width: 1440px) 648px, (min-width: 1280px) 576px, (min-width: 1040px) 456px, (min-width: 780px) 358px, (min-width: 640px) 294px, (min-width: 560px) 488px, 91.67vw"
                                     className="object-cover"
                                     style={{
                                         objectPosition: imageObjectPosition,

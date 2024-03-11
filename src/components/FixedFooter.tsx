@@ -1,19 +1,20 @@
-import { ImportantVariables } from "@/lib/consts";
+import { useOffsetHeight } from "@/hooks/useOffsetHeightByRef";
+
+import { useRef } from "react";
 
 export const FixedFooter = ({ children }: any) => {
+    const fixedFooter = useRef() as React.RefObject<HTMLDivElement>;
+    const fixedFooterHeight = useOffsetHeight(fixedFooter);
+
     return (
         <footer
-            id="fixed--footer"
-            className="z-10 fixed inset-x-0 w-full"
+            ref={fixedFooter}
+            className="fixed--footer z-10 fixed inset-x-0 w-full"
             style={{
-                height: `${ImportantVariables.fixedFooterHeight}vh`,
-                minHeight: `${ImportantVariables.fixedFooterHeight}vh`,
-                top: `${100 - ImportantVariables.fixedFooterHeight}vh`,
+                top: `calc(100vh - ${fixedFooterHeight}px)`,
             }}
         >
-            <div className="footer--content w-full h-[80vh] bg-black">
-                {children}
-            </div>
+            <div className="footer--content w-full bg-black">{children}</div>
         </footer>
     );
 };
