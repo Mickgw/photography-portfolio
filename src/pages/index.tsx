@@ -14,6 +14,7 @@ import { FixedFooter } from "@/components/FixedFooter";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Home({ featuredAlbums }: any) {
     // useGSAP(() => {

@@ -9,6 +9,8 @@ import { ContentLayout } from "@/components/ContentLayout";
 import { FixedFooter } from "@/components/FixedFooter";
 import type { Metadata } from "next";
 import { AlbumAbout } from "@/components/AlbumAbout/AlbumAbout";
+import ImageModalContextProvider from "@/context/ImageModalContext";
+import { ImageModal } from "@/components/ImageModal/ImageModal";
 
 export const metadata: Metadata = {
     title: "TEST",
@@ -37,12 +39,19 @@ export default function AlbumPage({ albumContents, albumPhotos }: any) {
                     />
 
                     {albumPhotos && (
-                        <section className="container overflow-hidden pb-32">
-                            <AlbumsImages
+                        <ImageModalContextProvider>
+                            <section className="container overflow-hidden pb-32">
+                                <AlbumsImages
+                                    albumFolder={albumContents?.albumFolderName}
+                                    albumPhotos={albumPhotos}
+                                />
+                            </section>
+
+                            <ImageModal
                                 albumFolder={albumContents?.albumFolderName}
                                 albumPhotos={albumPhotos}
                             />
-                        </section>
+                        </ImageModalContextProvider>
                     )}
                 </article>
             </ContentLayout>

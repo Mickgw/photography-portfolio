@@ -1,17 +1,16 @@
-import React, { useRef } from "react";
-import { ParallaxElement } from "../ParallaxElement/ParallaxElement";
-import { AlbumImagesColumn } from "./AlbumImagesColumn";
+import { useContext } from "react";
 import Image from "next/image";
-
-interface AlbumsImagesProps {
-    albumFolder: string;
-    albumPhotos: any;
-}
+import { ImageModalContext } from "@/context/ImageModalContext";
+import { AlbumsImagesProps } from "@/lib/props";
+import { motion } from "framer-motion";
 
 export const AlbumsImages = ({
     albumFolder,
     albumPhotos,
 }: AlbumsImagesProps) => {
+    const { activeImageChangeHandler, showModal } =
+        useContext(ImageModalContext);
+
     const getImageDimensions = (image: any) => {
         // Check if the image ends with "-P.jpg" or "-L.jpg"
         const isPortrait = image.endsWith("-P.jpg");
@@ -34,11 +33,15 @@ export const AlbumsImages = ({
                     <div
                         key={index}
                         className={`album--photo ${getImageDimensions(image)}`}
+                        onClick={() => {
+                            activeImageChangeHandler(index);
+                            showModal();
+                        }}
                     >
                         <Image
                             src={`/images/${albumFolder}/${image}`}
                             fill
-                            alt=""
+                            alt={image}
                             priority
                             quality={85}
                             placeholder="blur"

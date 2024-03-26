@@ -28,13 +28,13 @@ const PageTransition = ({ children }: any) => {
 
     return (
         <div className="page-transition--container overflow-hidden">
-            <motion.div
+            {/* <motion.div
                 variants={enterAnimation}
                 initial="initial"
                 animate="enter"
                 exit="exit"
                 className="w-screen h-screen overflow-hidden fixed inset-0 bg-black z-[100] cursor-wait"
-            />
+            /> */}
             {children}
         </div>
     );
