@@ -86,10 +86,16 @@ export const ImagesSlider = ({
                                         <Image
                                             src={`/images/${albumFolder}/${image}`}
                                             alt={image}
-                                            fill
+                                            width={0}
+                                            height={0}
                                             priority
                                             sizes={getImageDimensions(image)}
-                                            className="w-full h-full object-contain object-center"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                objectFit: "cover",
+                                                objectPosition: "center",
+                                            }}
                                             placeholder="blur"
                                             blurDataURL={`/images/${albumFolder}/${image}`}
                                             quality={85}
